@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1478017002 source:x:\documents\estrutura de dados\abp-ed\funcoes.c
+	"header.h"
+	<stdio.h>
+
+1478016967 x:\documents\estrutura de dados\abp-ed\header.h
+
+1478016968 source:x:\documents\estrutura de dados\abp-ed\main.c
+	"header.h"
+	<stdio.h>
+
