@@ -38,6 +38,7 @@ ABP* InsereArvore(ABP *Raiz, int num)
         Raiz->info = num;
         Raiz->esq = NULL;
         Raiz->dir = NULL;
+        Raiz->FB  = 0;
     }
     else if (num < (Raiz->info))
         Raiz->esq = InsereArvore(Raiz->esq, num);
@@ -146,8 +147,6 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
         Raiz = (ABP*) malloc(sizeof(ABP));
         Raiz->info = num;
         Raiz->esq = NULL;
-        Raiz->esq_alt = 0;
-        Raiz->dir_alt = 0;
         Raiz->FB   = 0;
     }
     else if (num < (Raiz->info))
@@ -196,8 +195,6 @@ void Atualiza_Info(AVL **Raiz)
     {
         if(*Raiz)
         {
-            (*Raiz)->dir_alt=AlturaNodo((*Raiz)->dir);
-            (*Raiz)->esq_alt=AlturaNodo((*Raiz)->esq);
             (*Raiz)->FB=FatorNodo(*Raiz);
             Atualiza_Info(&(*Raiz)->dir);
             Atualiza_Info(&(*Raiz)->esq);
@@ -210,8 +207,6 @@ void Atualiza_Info(AVL **Raiz)
 void Mostra_Infos (AVL *Raiz)
 {
     printf("\n %d",Raiz->info);
-    printf("   Altura Direita: %d",Raiz->dir_alt);
-    printf("   Altura Esquerda: %d",Raiz->esq_alt);
     printf("   Vai se foder Fator: %d\n",Raiz->FB);
 }
 
