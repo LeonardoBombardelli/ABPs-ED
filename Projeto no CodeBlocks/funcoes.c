@@ -114,6 +114,22 @@ int FatorArvore(ABP *Raiz)
 
 //---------------------------------------------------------------------------------//
 
+int FatorDaArvore(ABP *a)
+{
+    int balanc;
+
+    if (a)
+    {
+        balanc=AlturaNodo(a->esq)-AlturaNodo(a->dir);
+        if(balanc < 0)
+            balanc=balanc*-1;
+        return balanc;
+    }
+    else
+        return 0;
+}
+//---------------------------------------------------------------------------------//
+
 int conta_nodos(ABP *Raiz)
 {
     if(Raiz)
@@ -143,16 +159,46 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
 
 //------------------------------------------------------------------------------//
 
+ABP* AchaNodo(ABP *Nodo, int info)
+{
+    ABP *achou = NULL;
+
+    if(Nodo == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        if(Nodo->info == info)
+        {
+            return Nodo;
+        }
+        else
+        {
+            achou = AchaNodo(Nodo->esq, info);
+            if(!achou)
+            {
+                return AchaNodo(Nodo->dir, info);
+            }
+            else
+            {
+                return achou;
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------------//
+
 void Atualiza_Info(AVL **Raiz)
 {
     if (Raiz!=NULL)
     {
         if(*Raiz)
         {
-            (*Raiz)->dir_alt=AlturaNodoAVL((*Raiz)->dir);
-            (*Raiz)->esq_alt=AlturaNodoAVL((*Raiz)->esq);
-            (*Raiz)->FB=FatorNodoAVL(*Raiz);
-
+            (*Raiz)->dir_alt=AlturaNodo((*Raiz)->dir);
+            (*Raiz)->esq_alt=AlturaNodo((*Raiz)->esq);
+            (*Raiz)->FB=FatorNodo(*Raiz);
             Atualiza_Info(&(*Raiz)->dir);
             Atualiza_Info(&(*Raiz)->esq);
         }
@@ -169,56 +215,19 @@ void Mostra_Infos (AVL *Raiz)
     printf("   Vai se foder Fator: %d\n",Raiz->FB);
 }
 
-//--------------------------------------------------------------------------------//
-
-int AlturaNodoAVL(AVL *a)
-{
-    int Alt_Esq, Alt_Dir;
-    if (a == NULL)
-        return 0;
-    else
-    {
-        Alt_Esq = AlturaNodo(a->esq);
-        Alt_Dir = AlturaNodo(a->dir);
-        if (Alt_Esq > Alt_Dir)
-            return (1 + Alt_Esq);
-        else
-            return (1 + Alt_Dir);
-    }
-}
-
-//--------------------------------------------------------------------------------//
-
-int FatorNodoAVL(AVL* Nodo)
-{
-    if(Nodo != NULL)
-    {
-        return(AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
-    }
-    else return 0;
-}
-
 //---------------------------------------------------------------------------------//
-AVL* Teste (AVL *Nodo)
-{
-    if(Nodo)
-    {
-        Nodo=Rotacao(Nodo);
-    }
-    else
-        return Nodo;
-}
+
 AVL* Rotacao (AVL *Nodo)
 {
     if (Nodo)
     {
-        if (Nodo->FB > 1 && FatorNodoAVL(Nodo->esq) > 0)     // ROT SIMP DIR
+        if (Nodo->FB > 1 && FatorNodo(Nodo->esq) > 0)     // ROT SIMP DIR
             Nodo=rotacao_direita(Nodo);
-        if (Nodo->FB < -1 && FatorNodoAVL(Nodo->dir) < 0)    // ROT SIMP ESQ
+        if (Nodo->FB < -1 && FatorNodo(Nodo->dir) < 0)    // ROT SIMP ESQ
             Nodo=rotacao_esquerda(Nodo);
-        if (Nodo->FB > 1 && FatorNodoAVL(Nodo->esq) < 0)     // ROT DUP DIR
+        if (Nodo->FB > 1 && FatorNodo(Nodo->esq) < 0)     // ROT DUP DIR
             Nodo=rotacao_dupla_direita(Nodo);
-        if (Nodo->FB < -1 && FatorNodoAVL(Nodo->dir) > 0)    // ROT DUP ESQ
+        if (Nodo->FB < -1 && FatorNodo(Nodo->dir) > 0)    // ROT DUP ESQ
             Nodo=rotacao_dupla_esquerda(Nodo);
         Nodo->esq=Rotacao(Nodo->esq);
         Nodo->dir=Rotacao(Nodo->dir);
@@ -324,3 +333,4 @@ void printTreeInfo(AVL node)
 }
 
 //--------------------------------------------------------------------------//
+

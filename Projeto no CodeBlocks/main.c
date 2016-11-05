@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
         puts("1 - Inserir AVL");
         puts("2 - Contar");
         puts("3 - Imprimir por niveis");
-        puts("4 - Imprime Árvore com Conio");
+        puts("4 - Imprime Arvore com Conio");
+        puts("5 - Fator");
         puts("0 - Sair");
         printf("--------------");
         printf("\n");
@@ -34,6 +35,8 @@ int main(int argc, char *argv[])
         case 4:
             system("cls");
             imprimir_desenhando(arvore,1,1,' ');break;
+        case 5:
+            printf("\nFator da arvore: %d",FatorDaArvore(arvore));break;
         case 0:
             opt=0;break;
         }
