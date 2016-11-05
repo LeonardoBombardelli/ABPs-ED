@@ -2,13 +2,9 @@ typedef struct ABP_STRUCT {
     int info;
     struct ABP_STRUCT *esq, *dir;
     int FB;
-} ABP;
+} ABP,AVL;
 
-typedef struct AVL_STRUCT {
-    int info;
-    struct AVL_STRUCT *esq, *dir;
-    int FB;
-}AVL;
+
 
 void gotoxy(int x, int y);
 

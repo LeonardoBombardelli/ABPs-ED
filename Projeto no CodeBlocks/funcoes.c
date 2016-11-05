@@ -295,8 +295,6 @@ AVL* rotacao_dupla_esquerda (AVL *Nodo)
 
 void imprimir_desenhando(AVL *node,int contadorX,int contadorY, char ch)
 {
-    int i;
-
     if (ch==' ' && node)
     {
         gotoxy(X+contadorX,contadorY);
