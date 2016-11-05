@@ -129,6 +129,8 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
     return Raiz;
 }
 
+//------------------------------------------------------------------------------//
+
 void Atualiza_Info(AVL **Raiz)
 {
     if (Raiz!=NULL)
@@ -144,12 +146,17 @@ void Atualiza_Info(AVL **Raiz)
         }
     }
 }
+
+//-------------------------------------------------------------------------------//
+
 void Mostra_Infos (AVL *Raiz)
 {   printf("\n %d",Raiz->info);
     printf("   Altura Direita: %d",Raiz->dir_alt);
     printf("   Altura Esquerda: %d",Raiz->esq_alt);
     printf("   Vai se foder Fator: %d\n",Raiz->fator);
 }
+
+//--------------------------------------------------------------------------------//
 
 int FatorNodoAVL(AVL* Nodo)
 {
