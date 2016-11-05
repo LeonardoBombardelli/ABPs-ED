@@ -169,18 +169,53 @@ int FatorNodoAVL(AVL* Nodo)
 
 //---------------------------------------------------------------------------------//
 
-int AlturaNodoAVL(AVL *a)
+int Rotacao (AVL *Nodo)
 {
-    int Alt_Esq, Alt_Dir;
-    if (a == NULL)
-        return 0;
-    else
+    if (Nodo)
     {
-        Alt_Esq = AlturaNodo(a->esq);
-        Alt_Dir = AlturaNodo(a->dir);
-        if (Alt_Esq > Alt_Dir)
-            return (1 + Alt_Esq);
-        else
-            return (1 + Alt_Dir);
-    }
+        if (Nodo->fator > 1 && FatorNodoAVL(Nodo->esq) > 0)     // ROT SIMP DIR
+            if (Nodo->fator < -1 && FatorNodoAVL(Nodo->dir) < 0)    // ROT SIMP ESQ
+                if (Nodo->fator > 1 && FatorNodoAVL(Nodo->esq) < 0)     // ROT DUP DIR
+                    if (Nodo->fator < -1 && FatorNodoAVL(Nodo->dir) > 0)    // ROT DUP ESQ
+
+                    }
+}
+
+//------------------------ROTAÇÕES----------------------------------------------------//
+
+AVL* rotacao_direita(AVL* Nodo)
+{
+    AVL *aux;
+    aux = Nodo->esq;
+    Nodo->esq = aux->dir;
+    aux->dir = Nodo;
+    Nodo = aux;
+    return Nodo;
+}
+
+AVL* rotacao_esquerda(AVL *Nodo)
+{
+    AVL *aux;
+    aux = Nodo->dir;
+    Nodo->dir = aux->esq;
+    aux->esq = Nodo;
+    Nodo = aux;
+    return Nodo;
+}
+
+AVL* rotacao_dupla_direita (AVL* Nodo)
+{
+    AVL *aux, *aux2;
+    aux = Nodo->esq;
+    aux2 = aux->dir;
+    aux->dir = aux2->esq;
+    aux2->esq = aux;
+    Nodo->esq = aux2->dir;
+    aux2->dir = pt;
+    if (aux2->FB == 1) pt->FB = -1;
+    else pt->FB = 0;
+    if (aux2->FB == -1) aux->FB = 1;
+    else aux->FB = 0;
+    pt = aux2;
+    return pt;
 }
