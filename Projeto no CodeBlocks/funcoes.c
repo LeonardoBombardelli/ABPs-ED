@@ -20,15 +20,12 @@ ABP* InsereArvore(ABP *Raiz, int num)
         Raiz = (ABP*) malloc(sizeof(ABP));
         Raiz->info = num;
         Raiz->esq = NULL;
-        Raiz->dir = NULL;
-        Raiz->FB = 0;
 
     }
+    else if (num < (Raiz->info))
+        Raiz->esq = InsereArvore(Raiz->esq, num);
     else
-        if (num < (Raiz->info))
-            Raiz->esq = InsereArvore(Raiz->esq, num);
-        else
-            Raiz->dir = InsereArvore(Raiz->dir, num);
+        Raiz->dir = InsereArvore(Raiz->dir, num);
     return Raiz;
 }
 
@@ -98,3 +95,40 @@ int FatorArvore(ABP *Raiz)
     else return 0;
 }
 
+//---------------------------------------------------------------------------------//
+
+int conta_nodos(ABP *Raiz)
+{
+    if(Raiz)
+        return(1+conta_nodos(Raiz->esq)+conta_nodos(Raiz->dir));
+    else
+        return 0;
+}
+
+//---------------------------------------------------------------------------------//
+AVL* InsereArvoreAVL(AVL *Raiz, int num)
+{
+    if (Raiz == NULL)
+    {
+        Raiz = (ABP*) malloc(sizeof(ABP));
+        Raiz->info = num;
+        Raiz->esq = NULL;
+        Raiz->esq_alt = 0;
+        Raiz->dir_alt = 0;
+        Raiz->fator   = 0;
+    }
+    else if (num < (Raiz->info))
+    {
+        Raiz->esq = InsereArvore(Raiz->esq, num);
+        Raiz->esq_alt = AlturaNodo(Raiz->esq)+1;
+        Raiz->fator   = FatorNodo(Raiz);
+    }
+    else
+    {
+        Raiz->dir = InsereArvore(Raiz->dir, num);
+        Raiz->dir_alt = AlturaNodo(Raiz->dir)+1;
+        Raiz->fator   = FatorNodo(Raiz);
+    }
+
+    return Raiz;
+}
