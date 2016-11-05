@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     else
     {
         Entrada = fopen(argv[1], "r");
-        if (Entrada != NULL)
+        if (Entrada == NULL)
         {
             printf("Erro ao abrir arquivo 1");
             return 1;
