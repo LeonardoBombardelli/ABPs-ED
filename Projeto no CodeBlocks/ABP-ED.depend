@@ -9,15 +9,19 @@
 	"header.h"
 	<stdio.h>
 
-1478320144 source:c:\users\leona\documents\github\abps-ed\projeto no codeblocks\main.c
+1478325739 source:c:\users\leona\documents\github\abps-ed\projeto no codeblocks\main.c
 	"header.h"
 	<stdio.h>
+	<windows.h>
+	<conio.h>
 
-1478320065 c:\users\leona\documents\github\abps-ed\projeto no codeblocks\header.h
+1478325745 c:\users\leona\documents\github\abps-ed\projeto no codeblocks\header.h
 
-1478320517 source:c:\users\leona\documents\github\abps-ed\projeto no codeblocks\funcoes.c
+1478325768 source:c:\users\leona\documents\github\abps-ed\projeto no codeblocks\funcoes.c
 	"header.h"
 	<stdio.h>
+	<windows.h>
+	<conio.h>
 
 1478317100 source:c:\users\leonardo bombardelli\documents\github\abps-ed\projeto no codeblocks\funcoes.c
 	"header.h"

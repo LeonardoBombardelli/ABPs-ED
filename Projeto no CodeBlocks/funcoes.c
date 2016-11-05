@@ -1,8 +1,20 @@
 #include "header.h"
 #include <stdio.h>
+#include <windows.h>
+#include <conio.h>
+
+#define X 40    // ALTERAR O VALOR PARA MUDAR O INICIO DA ARVORE NO EIXO X
+
 
 //---------------------------------------------------------------------------------//
 
+void gotoxy(int x, int y)
+{
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),(COORD)
+    {
+        x-1,y-1
+    });
+}
 
 //==================================================================================//
 
@@ -120,7 +132,7 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
         Raiz->esq = NULL;
         Raiz->esq_alt = 0;
         Raiz->dir_alt = 0;
-        Raiz->fator   = 0;
+        Raiz->FB   = 0;
     }
     else if (num < (Raiz->info))
         Raiz->esq = InsereArvoreAVL(Raiz->esq, num);
@@ -139,8 +151,8 @@ void Atualiza_Info(AVL **Raiz)
         {
             (*Raiz)->dir_alt=AlturaNodoAVL((*Raiz)->dir);
             (*Raiz)->esq_alt=AlturaNodoAVL((*Raiz)->esq);
-            (*Raiz)->fator=FatorNodoAVL(*Raiz);
-            Mostra_Infos(*Raiz);
+            (*Raiz)->FB=FatorNodoAVL(*Raiz);
+
             Atualiza_Info(&(*Raiz)->dir);
             Atualiza_Info(&(*Raiz)->esq);
         }
@@ -150,10 +162,29 @@ void Atualiza_Info(AVL **Raiz)
 //-------------------------------------------------------------------------------//
 
 void Mostra_Infos (AVL *Raiz)
-{   printf("\n %d",Raiz->info);
+{
+    printf("\n %d",Raiz->info);
     printf("   Altura Direita: %d",Raiz->dir_alt);
     printf("   Altura Esquerda: %d",Raiz->esq_alt);
-    printf("   Vai se foder Fator: %d\n",Raiz->fator);
+    printf("   Vai se foder Fator: %d\n",Raiz->FB);
+}
+
+//--------------------------------------------------------------------------------//
+
+int AlturaNodoAVL(AVL *a)
+{
+    int Alt_Esq, Alt_Dir;
+    if (a == NULL)
+        return 0;
+    else
+    {
+        Alt_Esq = AlturaNodo(a->esq);
+        Alt_Dir = AlturaNodo(a->dir);
+        if (Alt_Esq > Alt_Dir)
+            return (1 + Alt_Esq);
+        else
+            return (1 + Alt_Dir);
+    }
 }
 
 //--------------------------------------------------------------------------------//
@@ -169,16 +200,21 @@ int FatorNodoAVL(AVL* Nodo)
 
 //---------------------------------------------------------------------------------//
 
-int Rotacao (AVL *Nodo)
+AVL* Rotacao (AVL *Nodo)
 {
     if (Nodo)
     {
-        if (Nodo->fator > 1 && FatorNodoAVL(Nodo->esq) > 0)     // ROT SIMP DIR
-            if (Nodo->fator < -1 && FatorNodoAVL(Nodo->dir) < 0)    // ROT SIMP ESQ
-                if (Nodo->fator > 1 && FatorNodoAVL(Nodo->esq) < 0)     // ROT DUP DIR
-                    if (Nodo->fator < -1 && FatorNodoAVL(Nodo->dir) > 0)    // ROT DUP ESQ
+        if (Nodo->FB > 1 && FatorNodoAVL(Nodo->esq) > 0)     // ROT SIMP DIR
+            Nodo=rotacao_direita(Nodo);
+        if (Nodo->FB < -1 && FatorNodoAVL(Nodo->dir) < 0)    // ROT SIMP ESQ
+            Nodo=rotacao_esquerda(Nodo);
+        if (Nodo->FB > 1 && FatorNodoAVL(Nodo->esq) < 0)     // ROT DUP DIR
+            Nodo=rotacao_dupla_direita(Nodo);
+        if (Nodo->FB < -1 && FatorNodoAVL(Nodo->dir) > 0)    // ROT DUP ESQ
+            Nodo=rotacao_dupla_esquerda(Nodo);
+    }
 
-                    }
+    return Nodo;
 }
 
 //------------------------ROTAÇÕES----------------------------------------------------//
@@ -189,6 +225,7 @@ AVL* rotacao_direita(AVL* Nodo)
     aux = Nodo->esq;
     Nodo->esq = aux->dir;
     aux->dir = Nodo;
+    Nodo->FB = 0;
     Nodo = aux;
     return Nodo;
 }
@@ -199,6 +236,7 @@ AVL* rotacao_esquerda(AVL *Nodo)
     aux = Nodo->dir;
     Nodo->dir = aux->esq;
     aux->esq = Nodo;
+    Nodo->FB = 0;
     Nodo = aux;
     return Nodo;
 }
@@ -211,11 +249,66 @@ AVL* rotacao_dupla_direita (AVL* Nodo)
     aux->dir = aux2->esq;
     aux2->esq = aux;
     Nodo->esq = aux2->dir;
-    aux2->dir = pt;
-    if (aux2->FB == 1) pt->FB = -1;
-    else pt->FB = 0;
+    aux2->dir = Nodo;
+    if (aux2->FB == 1) Nodo->FB = -1;
+    else Nodo->FB = 0;
     if (aux2->FB == -1) aux->FB = 1;
     else aux->FB = 0;
-    pt = aux2;
-    return pt;
+    Nodo = aux2;
+    return Nodo;
 }
+
+AVL* rotacao_dupla_esquerda (AVL *Nodo)
+{
+    AVL *aux, *aux2;
+    aux = Nodo->dir;
+    aux2 = aux->esq;
+    aux->esq = aux2->dir;
+    aux2->dir = aux;
+    Nodo->dir = aux2->esq;
+    aux2->esq = Nodo;
+    if (aux2->FB == -1) Nodo->FB = 1;
+    else Nodo->FB = 0;
+    if (aux2->FB == 1) aux->FB = -1;
+    else aux->FB = 0;
+    Nodo = aux2;
+    return Nodo;
+}
+
+// ------------------------- AUXILIAR --------------------------------//
+
+void imprimir_desenhando(AVL *node,int contadorX,int contadorY, char ch)
+{
+    int i;
+
+    if (ch==' ' && node)
+    {
+        gotoxy(X+contadorX,contadorY);
+        printTreeInfo(*node);
+        imprimir_desenhando(node->dir,6,contadorY+2,'\\');
+        imprimir_desenhando(node->esq,-6,contadorY+2,'/');
+    }
+    else if(node)
+    {
+        if(ch=='/')
+            gotoxy(X+contadorX+1,contadorY-1);
+        else
+        {
+            gotoxy(X+contadorX,contadorY-1);
+        }
+        printf("%c",ch);
+        gotoxy(X+contadorX,contadorY);
+        printTreeInfo(*node);
+        imprimir_desenhando(node->dir,contadorX+2,contadorY+2,'\\');
+        imprimir_desenhando(node->esq,contadorX-2,contadorY+2,'/');
+    }
+}
+
+//-------------------------------------------------------------------------//
+
+void printTreeInfo(AVL node)
+{
+    printf("%d ", node.info);
+}
+
+//--------------------------------------------------------------------------//

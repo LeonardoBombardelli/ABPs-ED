@@ -1,5 +1,7 @@
 #include "header.h"
 #include <stdio.h>
+#include <windows.h>
+#include <conio.h>
 
 int main(int argc, char *argv[])
 {
@@ -10,10 +12,9 @@ int main(int argc, char *argv[])
     {
         printf("\n--------------\n");
         puts("1 - Inserir AVL");
-        puts("2 - Atualizar");
-        puts("3 - Contar");
-        puts("4 - Imprimir por niveis");
-        puts("6 - Fator Balanceamento");
+        puts("2 - Contar");
+        puts("3 - Imprimir por niveis");
+        puts("4 - Fator Balanceamento");
         puts("0 - Sair");
         printf("--------------");
         printf("\n");
@@ -23,14 +24,19 @@ int main(int argc, char *argv[])
         case 1:
             puts("Digite o Numero a ser inserido");
             scanf("%d",&dado);
-            arvore=InsereArvore(arvore,dado);break;
-        case 2:
-            puts("Atualizando...");
+            arvore=InsereArvore(arvore,dado);
             Atualiza_Info(&arvore);
-        case 3:
+            arvore=Rotacao(arvore);break;
+            Atualiza_Info(&arvore);
+        case 2:
             printf("\n Quantia: %d",conta_nodos(arvore));break;
-        case 4:
+        case 3:
             ImprimeNiveis(arvore, 0);break;
+        case 4:
+            printf("\n%d",FatorArvore(arvore));break;
+        case 5:
+            system("cls");
+            imprimir_desenhando(arvore,1,1,' ');break;
         case 0:
             opt=0;break;
         }
