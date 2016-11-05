@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
         printf("\n--------------\n");
         puts("1 - Inserir AVL");
         puts("3 - Contar");
+        puts("4 - Imprimir por niveis");
         puts("6 - Fator Balanceamento");
         puts("0 - Sair");
         printf("--------------");
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
             arvore=InsereArvore(arvore,dado);break;
         case 3:
             printf("\n Quantia: %d",conta_nodos(arvore));break;
+        case 4:
+            ImprimeNiveis(arvore, 0);break;
         case 0:
             opt=0;break;
         }

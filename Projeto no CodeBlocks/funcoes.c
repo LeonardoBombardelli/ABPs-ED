@@ -20,7 +20,7 @@ ABP* InsereArvore(ABP *Raiz, int num)
         Raiz = (ABP*) malloc(sizeof(ABP));
         Raiz->info = num;
         Raiz->esq = NULL;
-
+        Raiz->dir = NULL;
     }
     else if (num < (Raiz->info))
         Raiz->esq = InsereArvore(Raiz->esq, num);
