@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         puts("1 - Inserir AVL");
         puts("2 - Contar");
         puts("3 - Imprimir por niveis");
-        puts("4 - Fator Balanceamento");
+        puts("4 - Imprime Árvore com Conio");
         puts("0 - Sair");
         printf("--------------");
         printf("\n");
@@ -26,15 +26,12 @@ int main(int argc, char *argv[])
             scanf("%d",&dado);
             arvore=InsereArvore(arvore,dado);
             Atualiza_Info(&arvore);
-            arvore=Rotacao(arvore);
-            Atualiza_Info(&arvore);break;
+            arvore=Rotacao(arvore);break;
         case 2:
             printf("\n Quantia: %d",conta_nodos(arvore));break;
         case 3:
             ImprimeNiveis(arvore, 0);break;
         case 4:
-            printf("\n%d",FatorArvore(arvore));break;
-        case 5:
             system("cls");
             imprimir_desenhando(arvore,1,1,' ');break;
         case 0:

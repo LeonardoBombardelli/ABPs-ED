@@ -220,9 +220,13 @@ AVL* Rotacao (AVL *Nodo)
             Nodo=rotacao_dupla_direita(Nodo);
         if (Nodo->FB < -1 && FatorNodoAVL(Nodo->dir) > 0)    // ROT DUP ESQ
             Nodo=rotacao_dupla_esquerda(Nodo);
+        Nodo->esq=Rotacao(Nodo->esq);
+        Nodo->dir=Rotacao(Nodo->dir);
+        return Nodo;
     }
+    else
+        return Nodo;
 
-    return Nodo;
 }
 
 //------------------------ROTAÇÕES----------------------------------------------------//
