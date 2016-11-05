@@ -11,6 +11,11 @@ ABP* InicializaArvore()
     return NULL;
 }
 
+AVL* InicializaAvl()
+{
+    return NULL;
+}
+
 //---------------------------------------------------------------------------------//
 
 ABP* InsereArvore(ABP *Raiz, int num)
@@ -118,17 +123,57 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
         Raiz->fator   = 0;
     }
     else if (num < (Raiz->info))
+        Raiz->esq = InsereArvoreAVL(Raiz->esq, num);
+    else
+        Raiz->dir = InsereArvoreAVL(Raiz->dir, num);
+    return Raiz;
+}
+
+void Atualiza_Info(AVL **Raiz)
+{
+    if (Raiz!=NULL)
     {
-        Raiz->esq = InsereArvore(Raiz->esq, num);
-        Raiz->esq_alt = AlturaNodo(Raiz->esq)+1;
-        Raiz->fator   = FatorNodo(Raiz);
+        if(*Raiz)
+        {
+            (*Raiz)->dir_alt=AlturaNodoAVL((*Raiz)->dir);
+            (*Raiz)->esq_alt=AlturaNodoAVL((*Raiz)->esq);
+            (*Raiz)->fator=FatorNodoAVL(*Raiz);
+            Mostra_Infos(*Raiz);
+            Atualiza_Info(&(*Raiz)->dir);
+            Atualiza_Info(&(*Raiz)->esq);
+        }
     }
+}
+void Mostra_Infos (AVL *Raiz)
+{   printf("\n %d",Raiz->info);
+    printf("   Altura Direita: %d",Raiz->dir_alt);
+    printf("   Altura Esquerda: %d",Raiz->esq_alt);
+    printf("   Vai se foder Fator: %d\n",Raiz->fator);
+}
+
+int FatorNodoAVL(AVL* Nodo)
+{
+    if(Nodo != NULL)
+    {
+        return(AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
+    }
+    else return 0;
+}
+
+//---------------------------------------------------------------------------------//
+
+int AlturaNodoAVL(AVL *a)
+{
+    int Alt_Esq, Alt_Dir;
+    if (a == NULL)
+        return 0;
     else
     {
-        Raiz->dir = InsereArvore(Raiz->dir, num);
-        Raiz->dir_alt = AlturaNodo(Raiz->dir)+1;
-        Raiz->fator   = FatorNodo(Raiz);
+        Alt_Esq = AlturaNodo(a->esq);
+        Alt_Dir = AlturaNodo(a->dir);
+        if (Alt_Esq > Alt_Dir)
+            return (1 + Alt_Esq);
+        else
+            return (1 + Alt_Dir);
     }
-
-    return Raiz;
 }

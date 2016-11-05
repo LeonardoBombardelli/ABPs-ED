@@ -7,7 +7,7 @@ typedef struct AVL_STRUCT {
     int info;
     struct AVL_STRUCT *esq, *dir;
     int esq_alt,dir_alt,fator;
-        }AVL;
+}AVL;
 
 ABP* InicializaArvore();
 ABP* InsereArvore(ABP *Raiz, int num);
@@ -17,5 +17,9 @@ int AlturaNodo(ABP* a);
 int conta_nodos(ABP *Raiz);
 
 // AVL
+AVL* InicializaAvl();
 AVL* InsereArvoreAVL(AVL *Raiz, int num);
-
+void Atualiza_Info(AVL **Raiz);
+void Mostra_Infos (AVL *Raiz);
+int AlturaNodoAVL(AVL *a);
+int FatorNodoAVL(AVL* Nodo);

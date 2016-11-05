@@ -3,13 +3,14 @@
 
 int main(int argc, char *argv[])
 {
-    ABP *arvore = InicializaArvore();
+    AVL *arvore = InicializaAvl();
     int opt =1,dado=0,inf=0;
 
     while(opt)
     {
         printf("\n--------------\n");
         puts("1 - Inserir AVL");
+        puts("2 - Atualizar");
         puts("3 - Contar");
         puts("4 - Imprimir por niveis");
         puts("6 - Fator Balanceamento");
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
             puts("Digite o Numero a ser inserido");
             scanf("%d",&dado);
             arvore=InsereArvore(arvore,dado);break;
+        case 2:
+            puts("Atualizando...");
+            Atualiza_Info(&arvore);
         case 3:
             printf("\n Quantia: %d",conta_nodos(arvore));break;
         case 4:
