@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
             scanf("%d",&dado);
             arvore=InsereArvore(arvore,dado);
             Atualiza_Info(&arvore);
-            arvore=Rotacao(arvore);break;
-            Atualiza_Info(&arvore);
+            arvore=Rotacao(arvore);
+            Atualiza_Info(&arvore);break;
         case 2:
             printf("\n Quantia: %d",conta_nodos(arvore));break;
         case 3:

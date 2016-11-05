@@ -199,7 +199,15 @@ int FatorNodoAVL(AVL* Nodo)
 }
 
 //---------------------------------------------------------------------------------//
-
+AVL* Teste (AVL *Nodo)
+{
+    if(Nodo)
+    {
+        Nodo=Rotacao(Nodo);
+    }
+    else
+        return Nodo;
+}
 AVL* Rotacao (AVL *Nodo)
 {
     if (Nodo)
