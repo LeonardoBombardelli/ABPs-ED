@@ -1,0 +1,9 @@
+I insere.txt
+E
+I insere2.txt
+E
+I n100.txt
+E
+I n1000.txt
+E
+I n100000.txt

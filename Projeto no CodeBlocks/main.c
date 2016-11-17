@@ -2,97 +2,134 @@
 #include <stdio.h>
 #include <windows.h>
 #include <conio.h>
-
+#include <time.h>
 int main(int argc, char *argv[])
 {
-    AVL *arvore = InicializaAvl();
-    int opt =1,dado=0,inf=0,arv=0;
+    FILE* Entrada;
+    FILE* Saida;
+    FILE* Inserindo;
+    ABP   *abptree=NULL,*avltree=NULL;
+    char bug;
+    char insere_arquivo[20];
+    char comando;
+    int valor_lido,rotacoes,nodos;
+    int comparacoes;
+    float time;
+    clock_t  start;
+    clock_t  end;
 
-    puts("1 - ABP");
-    puts("2 - AVL");
-    printf("Insira o Numero: ");
-    scanf("%d",&arv);
-
-    if (arv==2)
+    printf("Comecando \n");
+    if(argc != 3)
     {
-        while(opt)
+        printf("Esperava 3 argumentos, recebeu %d argumentos", argc);
+        return 1;
+    }
+    else
+    {
+        Entrada = fopen(argv[1], "r");
+        if (Entrada == NULL)
         {
-            printf("\n--------------\n");
-            puts("1 - Inserir AVL");
-            puts("2 - Contar");
-            puts("3 - Imprimir por niveis");
-            puts("4 - Imprime Arvore com Conio");
-            puts("5 - Fator");
-            puts("0 - Sair");
-            printf("--------------");
-            printf("\n");
-            scanf("%d",&opt);
-            switch(opt)
+            printf("Erro ao abrir arquivo 1");
+            return 1;
+        }
+
+        Saida = fopen(argv[2], "w");
+        while(!feof(Entrada))                       // Repete até o roteiro acabar
+        {
+            fscanf(Entrada, "%c",&comando);         // Pega o comando e o lixo que vem após
+            fscanf(Entrada, "%c",&bug);
+            printf("\n%c\n",comando);
+            if (comando == 'I')                     // Se for inserir, vai abrir outro arquivo
             {
-            case 1:
-                puts("Digite o Numero a ser inserido");
-                scanf("%d",&dado);
-                arvore=InsereArvore(arvore,dado);
-                Atualiza_Info(&arvore);
-                arvore=Rotacao(arvore);
-                break;
-            case 2:
-                printf("\n Quantia: %d",conta_nodos(arvore));
-                break;
-            case 3:
-                ImprimeNiveis(arvore, 0);
-                break;
-            case 4:
-                system("cls");
-                imprimir_desenhando(arvore,1,1,' ');
-                break;
-            case 5:
-                printf("\nFator da arvore: %d",FatorDaArvore(arvore));
-                break;
-            case 0:
-                opt=0;
-                break;
+                fscanf(Entrada, "%s",&insere_arquivo);  // Pega o nome do arquivo do primeiro arquivo
+                fscanf(Entrada, "%c",&bug);             // Pega o lixo
+                Inserindo = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
+                comparacoes=0;                          // Zera as variaveis, arvores e o tempo
+                start = clock();
+                time = 0;
+                nodos=0;
+                abptree=NULL;
+                while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
+                {
+                    fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
+                    printf("\n%d",valor_lido);
+                    abptree=InsereArvore(abptree,valor_lido,&comparacoes);
+                    nodos+=1;
+                }
+            end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
+            time = (float)(end - start) / CLOCKS_PER_SEC;
+            fclose(Inserindo);
+            fprintf(Saida,"*********VERSÃO COM ABP***********\n");
+            fprintf(Saida,"Inserindo dados do arquivo %s\n",insere_arquivo);
+            fprintf(Saida,"********ESTATÍSTICAS ABP***********\n");
+            fprintf(Saida,"Tempo: %f ms\n",time);
+            fprintf(Saida,"Nodos: %d\n",nodos);
+            fprintf(Saida,"Altura: %d\n",AlturaNodo(abptree));
+            fprintf(Saida,"Fator: %d\n",FatorArvore(abptree));
+            fprintf(Saida,"Comparações: %d\n",comparacoes);
+            fprintf(Saida,"Rotações: 0\n");
+            fprintf(Saida,"----------------------------------\n");
+            }
+            if (comando == 'E')
+            {
+                printf("\nESTATISTICAS BONITAS\n");
+            }
+            if (comando == 'R')
+            {
+                printf("\nESTOU REMOVENDO\n");
             }
         }
-    }
-    else if (arv==1)
-    {
-        while(opt)
+        fclose(Entrada);            // Fecho o primeiro arquivo para reseta-lo e começar a AVL
+        //------------------------------------ AVL --------------------------------------//
+        Entrada = fopen(argv[1], "r");
+        while(!feof(Entrada))
         {
-            printf("\n--------------\n");
-            puts("1 - Inserir ABP");
-            puts("2 - Contar");
-            puts("3 - Imprimir por niveis");
-            puts("4 - Imprime Arvore com Conio");
-            puts("5 - Fator");
-            puts("0 - Sair");
-            printf("--------------");
-            printf("\n");
-            scanf("%d",&opt);
-            switch(opt)
+            fscanf(Entrada, "%c",&comando);         // Pega o comando e o lixo que vem após
+            fscanf(Entrada, "%c",&bug);
+            printf("\n%c\n",comando);
+            if (comando == 'I')                     // Se for inserir, vai abrir outro arquivo
             {
-            case 1:
-                puts("Digite o Numero a ser inserido");
-                scanf("%d",&dado);
-                arvore=InsereArvore(arvore,dado);
-                Atualiza_Info(&arvore);
-                break;
-            case 2:
-                printf("\n Quantia: %d",conta_nodos(arvore));
-                break;
-            case 3:
-                ImprimeNiveis(arvore, 0);
-                break;
-            case 4:
-                system("cls");
-                imprimir_desenhando(arvore,1,1,' ');
-                break;
-            case 5:
-                printf("\nFator da arvore: %d",FatorDaArvore(arvore));
-                break;
-            case 0:
-                opt=0;
-                break;
+                fscanf(Entrada, "%s",&insere_arquivo);
+                puts(insere_arquivo);
+                fscanf(Entrada, "%c",&bug);
+                Inserindo = fopen(insere_arquivo,"r");
+                comparacoes=0;
+                start = clock();
+                time =0;
+                nodos=0;
+                rotacoes=0;
+                avltree=NULL;
+                while(!feof(Inserindo))
+                {
+                    fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
+                    printf("\n%d",valor_lido);
+                    avltree=InsereArvore(avltree,valor_lido,&comparacoes);
+                    Atualiza_Info(&avltree);
+                    Rotacao(avltree,&rotacoes);
+                    nodos+=1;
+                }
+
+            end = clock();
+            time = (float)(end - start) / CLOCKS_PER_SEC;
+            fclose(Inserindo);
+            fprintf(Saida,"*********VERSÃO COM AVL***********\n");
+            fprintf(Saida,"Inserindo dados do arquivo %s\n",insere_arquivo);
+            fprintf(Saida,"********ESTATÍSTICAS AVL***********\n");
+            fprintf(Saida,"Tempo: %f ms\n",time);
+            fprintf(Saida,"Nodos: %d\n",nodos);
+            fprintf(Saida,"Altura: %d\n",AlturaNodo(avltree));
+            fprintf(Saida,"Fator: %d\n",FatorArvore(avltree));
+            fprintf(Saida,"Comparações: %d\n",comparacoes);
+            fprintf(Saida,"Rotações: %d\n",rotacoes);
+            fprintf(Saida,"----------------------------------\n");
+            }
+            if (comando == 'E')
+            {
+                printf("\nESTATISTICAS BONITAS\n");
+            }
+            if (comando == 'R')
+            {
+                printf("\nESTOU REMOVENDO\n");
             }
         }
     }
