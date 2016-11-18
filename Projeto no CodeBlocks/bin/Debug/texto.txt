@@ -1,9 +1,4 @@
-I insere.txt
+I n10000.txt
 E
-I insere2.txt
+C n100000.txt
 E
-I n100.txt
-E
-I n1000.txt
-E
-I n100000.txt

@@ -9,7 +9,7 @@ typedef struct ABP_STRUCT {
 void gotoxy(int x, int y);
 
 ABP* InicializaArvore();
-ABP* InsereArvore(ABP *Raiz, int num, int *comparacoes);
+ABP* InsereArvore(ABP *Raiz, int num, double *comparacoes);
 void ImprimeNiveis(ABP *Raiz, int Nivel);
 
 
@@ -18,7 +18,7 @@ AVL* InicializaAvl();
 AVL* InsereArvoreAVL(AVL *Raiz, int num);
 void Atualiza_Info(AVL **Raiz);
 void Mostra_Infos (AVL *Raiz);
-AVL* Rotacao (AVL *Nodo,int *rotacoes);
+AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes);
 AVL* rotacao_direita(AVL* Nodo);
 AVL* rotacao_esquerda(AVL *Nodo);
 AVL* rotacao_dupla_direita (AVL* Nodo);
@@ -30,9 +30,9 @@ int FatorNodo(ABP* Nodo);
 int AlturaNodo(ABP* a);
 int conta_nodos(ABP *Raiz);
 int FatorDaArvore(ABP *a);
-int AchaNodo(ABP *Nodo, int info);
+int AchaNodo(ABP *Nodo, int info, double *comparacoes);
 ABP* MontaInterseccao (ABP *um, ABP *dois, ABP **montado);
-ABP* Intersecao (ABP *um, ABP *dois, int info);
+int Intersecao (ABP *um, ABP *dois, int info);
 // AUXILIAR
 
 void imprimir_desenhando(AVL *node,int contadorX,int contadorY, char ch);

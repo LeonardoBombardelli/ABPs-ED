@@ -8,13 +8,16 @@ int main(int argc, char *argv[])
     FILE* Entrada;
     FILE* Saida;
     FILE* Inserindo;
+    FILE* Consultando;
     ABP   *abptree=NULL,*avltree=NULL;
+    char acao[40];
     char bug;
     char insere_arquivo[20];
+    char consulta_arquivo[20];
     char comando;
-    int valor_lido,rotacoes,nodos;
-    int comparacoes;
-    float time;
+    int valor_lido,nodos;
+    double comparacoes,rotacoes;
+    clock_t time;
     clock_t  start;
     clock_t  end;
 
@@ -44,11 +47,11 @@ int main(int argc, char *argv[])
                 fscanf(Entrada, "%s",&insere_arquivo);  // Pega o nome do arquivo do primeiro arquivo
                 fscanf(Entrada, "%c",&bug);             // Pega o lixo
                 Inserindo = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
-                comparacoes=0;                          // Zera as variaveis, arvores e o tempo
+                comparacoes=0;                          // Zera as variaveis e o tempo
                 start = clock();
                 time = 0;
                 nodos=0;
-                abptree=NULL;
+                rotacoes=0;
                 while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
@@ -56,27 +59,49 @@ int main(int argc, char *argv[])
                     abptree=InsereArvore(abptree,valor_lido,&comparacoes);
                     nodos+=1;
                 }
-            end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
-            time = (float)(end - start) / CLOCKS_PER_SEC;
-            fclose(Inserindo);
-            fprintf(Saida,"*********VERSÃO COM ABP***********\n");
-            fprintf(Saida,"Inserindo dados do arquivo %s\n",insere_arquivo);
-            fprintf(Saida,"********ESTATÍSTICAS ABP***********\n");
-            fprintf(Saida,"Tempo: %f ms\n",time);
-            fprintf(Saida,"Nodos: %d\n",nodos);
-            fprintf(Saida,"Altura: %d\n",AlturaNodo(abptree));
-            fprintf(Saida,"Fator: %d\n",FatorArvore(abptree));
-            fprintf(Saida,"Comparações: %d\n",comparacoes);
-            fprintf(Saida,"Rotações: 0\n");
-            fprintf(Saida,"----------------------------------\n");
+                end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
+                time = 1000 * (end - start) / CLOCKS_PER_SEC;
+                fclose(Inserindo);
+                strcpy(acao,"Inserindo dados do arquivo");
             }
-            if (comando == 'E')
+            if (comando == 'E')     // Grava as estatisticas
             {
-                printf("\nESTATISTICAS BONITAS\n");
+                fprintf(Saida,"*********VERSÃO COM ABP***********\n");
+                fprintf(Saida,"%s %s\n",acao,insere_arquivo);
+                fprintf(Saida,"********ESTATÍSTICAS ABP***********\n");
+                fprintf(Saida,"Tempo: %ld ms\n",time);
+                fprintf(Saida,"Nodos: %d\n",nodos);
+                fprintf(Saida,"Altura: %d\n",AlturaNodo(abptree));
+                fprintf(Saida,"Fator: %d\n",FatorArvore(abptree));
+                fprintf(Saida,"Comparações: %.0lf\n",comparacoes);
+                fprintf(Saida,"Rotações: %.0lf\n",rotacoes);
+                fprintf(Saida,"----------------------------------\n");
             }
             if (comando == 'R')
             {
                 printf("\nESTOU REMOVENDO\n");
+            }
+            if (comando == 'C')
+            {
+                fscanf(Entrada, "%s",&consulta_arquivo);  // Pega o nome do arquivo do primeiro arquivo
+                fscanf(Entrada, "%c",&bug);             // Pega o lixo após
+                Consultando = fopen(consulta_arquivo,"r");  // Abre o arquivo que tem os dados
+                comparacoes=0;                          // Zera as variaveis e o tempo
+                start = clock();
+                time = 0;
+                nodos=0;
+                rotacoes=0;
+                while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
+                {
+                    fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
+                    printf("\n%d",valor_lido);
+                    if (AchaNodo(abptree,valor_lido,&comparacoes))
+                        nodos+=1;
+                }
+                end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
+                time = 1000 * (end - start) / CLOCKS_PER_SEC;
+                fclose(Inserindo);
+                strcpy(acao,"Consultando dados do arquivo");
             }
         }
         fclose(Entrada);            // Fecho o primeiro arquivo para reseta-lo e começar a AVL
@@ -98,38 +123,59 @@ int main(int argc, char *argv[])
                 time =0;
                 nodos=0;
                 rotacoes=0;
-                avltree=NULL;
                 while(!feof(Inserindo))
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
                     printf("\n%d",valor_lido);
                     avltree=InsereArvore(avltree,valor_lido,&comparacoes);
                     Atualiza_Info(&avltree);
-                    Rotacao(avltree,&rotacoes);
+                    Rotacao(avltree,&rotacoes,&comparacoes);
                     nodos+=1;
                 }
-
-            end = clock();
-            time = (float)(end - start) / CLOCKS_PER_SEC;
-            fclose(Inserindo);
-            fprintf(Saida,"*********VERSÃO COM AVL***********\n");
-            fprintf(Saida,"Inserindo dados do arquivo %s\n",insere_arquivo);
-            fprintf(Saida,"********ESTATÍSTICAS AVL***********\n");
-            fprintf(Saida,"Tempo: %f ms\n",time);
-            fprintf(Saida,"Nodos: %d\n",nodos);
-            fprintf(Saida,"Altura: %d\n",AlturaNodo(avltree));
-            fprintf(Saida,"Fator: %d\n",FatorArvore(avltree));
-            fprintf(Saida,"Comparações: %d\n",comparacoes);
-            fprintf(Saida,"Rotações: %d\n",rotacoes);
-            fprintf(Saida,"----------------------------------\n");
+                end = clock();
+                time = 1000 * (end - start) / CLOCKS_PER_SEC;
+                fclose(Inserindo);
+                strcpy(acao,"Inserindo dados do arquivo");
             }
-            if (comando == 'E')
+            if (comando == 'E') // IMPRIMI
             {
-                printf("\nESTATISTICAS BONITAS\n");
+                fprintf(Saida,"*********VERSÃO COM AVL***********\n");
+                fprintf(Saida,"%s %s\n",acao,insere_arquivo);
+                fprintf(Saida,"********ESTATÍSTICAS AVL***********\n");
+                fprintf(Saida,"Tempo: %ld ms\n",time);
+                fprintf(Saida,"Nodos: %d\n",nodos);
+                fprintf(Saida,"Altura: %d\n",AlturaNodo(avltree));
+                fprintf(Saida,"Fator: %d\n",FatorArvore(avltree));
+                fprintf(Saida,"Comparações: %.0lf\n",comparacoes);
+                fprintf(Saida,"Rotações: %.0lf\n",rotacoes);
+                fprintf(Saida,"----------------------------------\n");
             }
+
             if (comando == 'R')
             {
                 printf("\nESTOU REMOVENDO\n");
+            }
+            if (comando == 'C')
+            {
+                fscanf(Entrada, "%s",&consulta_arquivo);  // Pega o nome do arquivo do primeiro arquivo
+                fscanf(Entrada, "%c",&bug);             // Pega o lixo após
+                Consultando = fopen(consulta_arquivo,"r");  // Abre o arquivo que tem os dados
+                comparacoes=0;                          // Zera as variaveis e o tempo
+                start = clock();
+                time = 0;
+                nodos=0;
+                rotacoes=0;
+                while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
+                {
+                    fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
+                    printf("\n%d",valor_lido);
+                    if(AchaNodo(avltree,valor_lido,&comparacoes))
+                        nodos+=1;
+                }
+                end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
+                time = 1000 * (end - start) / CLOCKS_PER_SEC;
+                fclose(Inserindo);
+                strcpy(acao,"Consultando dados do arquivo");
             }
         }
     }

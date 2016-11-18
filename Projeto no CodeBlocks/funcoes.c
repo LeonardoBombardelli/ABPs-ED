@@ -30,7 +30,7 @@ AVL* InicializaAvl()
 
 //---------------------------------------------------------------------------------//
 
-ABP* InsereArvore(ABP *Raiz, int num, int *comparacoes)
+ABP* InsereArvore(ABP *Raiz, int num, double *comparacoes)
 {
     if (Raiz == NULL)
     {
@@ -44,11 +44,12 @@ ABP* InsereArvore(ABP *Raiz, int num, int *comparacoes)
     {
         *comparacoes+=1;
         Raiz->esq = InsereArvore(Raiz->esq, num, comparacoes);
-            }
+    }
     else
-    {   *comparacoes+=1;
+    {
+        *comparacoes+=1;
         Raiz->dir = InsereArvore(Raiz->dir, num, comparacoes);
-            }
+    }
     return Raiz;
 }
 
@@ -163,7 +164,7 @@ AVL* InsereArvoreAVL(AVL *Raiz, int num)
 
 //------------------------------------------------------------------------------//
 
-int AchaNodo(ABP *Nodo, int info)
+int AchaNodo(ABP *Nodo, int info, double *comparacoes)
 {
     ABP *achou = NULL;
 
@@ -173,20 +174,22 @@ int AchaNodo(ABP *Nodo, int info)
     }
     else
     {
+        *comparacoes+=1;
         if(Nodo->info == info)
         {
             return 1;
         }
         else
         {
-            achou = AchaNodo(Nodo->esq, info);
-            if(!achou)
+            if(info > Nodo->info)
             {
-                return AchaNodo(Nodo->dir, info);
+                *comparacoes+=1;
+                return achou = AchaNodo(Nodo->dir, info, comparacoes);
             }
-            else
+            else if(info <= Nodo->info)
             {
-                return 1;
+                *comparacoes+=1;
+                return AchaNodo(Nodo->esq, info, comparacoes);
             }
         }
     }
@@ -217,32 +220,36 @@ void Mostra_Infos (AVL *Raiz)
 
 //---------------------------------------------------------------------------------//
 
-AVL* Rotacao (AVL *Nodo,int *rotacoes)
+AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes)
 {
     if (Nodo)
     {
         if (Nodo->FB > 1 && FatorNodo(Nodo->esq) > 0)     // ROT SIMP DIR
-            {
-                *rotacoes+=1;
-                Nodo=rotacao_direita(Nodo);
-            }
+        {
+            *comparacoes+=1;
+            *rotacoes+=1;
+            Nodo=rotacao_direita(Nodo);
+        }
         if (Nodo->FB < -1 && FatorNodo(Nodo->dir) < 0)    // ROT SIMP ESQ
-            {
-                *rotacoes+=1;
-                Nodo=rotacao_esquerda(Nodo);
-                            }
+        {
+            *comparacoes+=1;
+            *rotacoes+=1;
+            Nodo=rotacao_esquerda(Nodo);
+        }
         if (Nodo->FB > 1 && FatorNodo(Nodo->esq) < 0)     // ROT DUP DIR
-            {
-                *rotacoes+=1;
-                Nodo=rotacao_dupla_direita(Nodo);
-                            }
+        {
+            *comparacoes+=1;
+            *rotacoes+=1;
+            Nodo=rotacao_dupla_direita(Nodo);
+        }
         if (Nodo->FB < -1 && FatorNodo(Nodo->dir) > 0)    // ROT DUP ESQ
-            {
-                *rotacoes+=1;
-                Nodo=rotacao_dupla_esquerda(Nodo);
-                            }
-        Nodo->esq=Rotacao(Nodo->esq,rotacoes);
-        Nodo->dir=Rotacao(Nodo->dir,rotacoes);
+        {
+            *comparacoes+=1;
+            *rotacoes+=1;
+            Nodo=rotacao_dupla_esquerda(Nodo);
+        }
+        Nodo->esq=Rotacao(Nodo->esq,rotacoes,comparacoes);
+        Nodo->dir=Rotacao(Nodo->dir,rotacoes,comparacoes);
         return Nodo;
     }
     else
@@ -344,7 +351,7 @@ void printTreeInfo(AVL node)
 
 //--------------------------------------------------------------------------//
 
-ABP* Intersecao (ABP *um, ABP *dois, int info)
+/*int Intersecao (ABP *um, ABP *dois, int info)
 {
     if(AchaNodo(um,info)&&AchaNodo(dois,info))
         return 1;
@@ -352,7 +359,7 @@ ABP* Intersecao (ABP *um, ABP *dois, int info)
         return 0;
 }
 
-/*ABP* MontaInterseccao (ABP *um, ABP *dois, ABP **montado)
+ABP* MontaInterseccao (ABP *um, ABP *dois, ABP **montado)
 {
 
     if(um==NULL)

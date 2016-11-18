@@ -1,100 +1,40 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo insere.txt
+Inserindo dados do arquivo n10000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 0.000000 ms
-Nodos: 4
-Altura: 4
-Fator: 0
-Comparações: 6
+Tempo: 299 ms
+Nodos: 10000
+Altura: 31
+Fator: 17
+Comparações: 153375
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo insere2.txt
+Consultando dados do arquivo n10000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 0.002000 ms
-Nodos: 72
-Altura: 12
-Fator: 1
-Comparações: 454
-Rotações: 0
-----------------------------------
-*********VERSÃO COM ABP***********
-Inserindo dados do arquivo n100.txt
-********ESTATÍSTICAS ABP***********
-Tempo: 0.004000 ms
-Nodos: 100
-Altura: 17
-Fator: 10
-Comparações: 699
-Rotações: 0
-----------------------------------
-*********VERSÃO COM ABP***********
-Inserindo dados do arquivo n1000.txt
-********ESTATÍSTICAS ABP***********
-Tempo: 0.030000 ms
-Nodos: 1000
-Altura: 22
-Fator: 13
-Comparações: 10301
-Rotações: 0
-----------------------------------
-*********VERSÃO COM ABP***********
-Inserindo dados do arquivo n100000.txt
-********ESTATÍSTICAS ABP***********
-Tempo: 3.284000 ms
-Nodos: 100000
-Altura: 480
-Fator: 464
-Comparações: 16793479
+Tempo: 2765 ms
+Nodos: 10000
+Altura: 31
+Fator: 17
+Comparações: 1216750
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo insere.txt
+Inserindo dados do arquivo n10000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 0.001000 ms
-Nodos: 4
-Altura: 2
-Fator: 0
-Comparações: 4
-Rotações: 1
+Tempo: 875 ms
+Nodos: 10000
+Altura: 13
+Fator: 2
+Comparações: 87068
+Rotações: 7798
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo insere2.txt
+Consultando dados do arquivo n10000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 0.001000 ms
-Nodos: 72
-Altura: 2
-Fator: 0
-Comparações: 156
-Rotações: 34
-----------------------------------
-*********VERSÃO COM AVL***********
-Inserindo dados do arquivo n100.txt
-********ESTATÍSTICAS AVL***********
-Tempo: 0.002000 ms
-Nodos: 100
-Altura: 5
-Fator: 1
-Comparações: 294
-Rotações: 48
-----------------------------------
-*********VERSÃO COM AVL***********
-Inserindo dados do arquivo n1000.txt
-********ESTATÍSTICAS AVL***********
-Tempo: 0.032000 ms
-Nodos: 1000
-Altura: 5
-Fator: 1
-Comparações: 5458
-Rotações: 706
-----------------------------------
-*********VERSÃO COM AVL***********
-Inserindo dados do arquivo n100000.txt
-********ESTATÍSTICAS AVL***********
-Tempo: 2.743000 ms
-Nodos: 100000
-Altura: 7
-Fator: 1
-Comparações: 426574
-Rotações: 60574
+Tempo: 2799 ms
+Nodos: 2328
+Altura: 13
+Fator: 2
+Comparações: 2382360
+Rotações: 0
 ----------------------------------
