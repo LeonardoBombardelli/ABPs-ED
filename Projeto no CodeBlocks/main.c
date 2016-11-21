@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
                 while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    printf("\n%d",valor_lido);
                     abptree=InsereArvore(abptree,valor_lido,&comparacoes);
                     nodos+=1;
                 }
@@ -94,7 +93,6 @@ int main(int argc, char *argv[])
                 while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    printf("\n%d",valor_lido);
                     if (AchaNodo(abptree,valor_lido,&comparacoes))
                         nodos+=1;
                 }
@@ -126,7 +124,6 @@ int main(int argc, char *argv[])
                 while(!feof(Inserindo))
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    printf("\n%d",valor_lido);
                     avltree=InsereArvore(avltree,valor_lido,&comparacoes);
                     Atualiza_Info(&avltree);
                     Rotacao(avltree,&rotacoes,&comparacoes);
@@ -168,7 +165,6 @@ int main(int argc, char *argv[])
                 while(!feof(Inserindo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    printf("\n%d",valor_lido);
                     if(AchaNodo(avltree,valor_lido,&comparacoes))
                         nodos+=1;
                 }

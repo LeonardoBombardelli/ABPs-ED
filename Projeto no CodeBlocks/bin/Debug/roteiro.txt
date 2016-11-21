@@ -1,0 +1,6 @@
+I n100.txt
+E
+I n1000.txt
+E
+I n10000.txt
+E
