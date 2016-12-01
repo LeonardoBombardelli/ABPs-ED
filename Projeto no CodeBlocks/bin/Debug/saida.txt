@@ -11,7 +11,7 @@ Rotações: 0
 *********VERSÃO COM ABP***********
 Inserindo dados do arquivo n1000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 0 ms
+Tempo: 1 ms
 Nodos: 1000
 Altura: 26
 Fator: 13
@@ -21,7 +21,7 @@ Rotações: 0
 *********VERSÃO COM ABP***********
 Inserindo dados do arquivo n10000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 6 ms
+Tempo: 5 ms
 Nodos: 10000
 Altura: 43
 Fator: 17
@@ -31,7 +31,7 @@ Rotações: 0
 *********VERSÃO COM AVL***********
 Inserindo dados do arquivo n100.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 1 ms
+Tempo: 0 ms
 Nodos: 100
 Altura: 5
 Fator: 1
@@ -51,7 +51,7 @@ Rotações: 586
 *********VERSÃO COM AVL***********
 Inserindo dados do arquivo n10000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 8 ms
+Tempo: 7 ms
 Nodos: 10000
 Altura: 5
 Fator: 1

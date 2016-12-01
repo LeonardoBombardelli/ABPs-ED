@@ -239,13 +239,13 @@ AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes)
         if (Nodo->FB > 1 && FatorNodo(Nodo->esq) < 0)     // ROT DUP DIR
         {
             *comparacoes+=1;
-            *rotacoes+=1;
+            *rotacoes+=2;
             Nodo=rotacao_dupla_direita(Nodo);
         }
         if (Nodo->FB < -1 && FatorNodo(Nodo->dir) > 0)    // ROT DUP ESQ
         {
             *comparacoes+=1;
-            *rotacoes+=1;
+            *rotacoes+=2;
             Nodo=rotacao_dupla_esquerda(Nodo);
         }
         Nodo->esq=Rotacao(Nodo->esq,rotacoes,comparacoes);
