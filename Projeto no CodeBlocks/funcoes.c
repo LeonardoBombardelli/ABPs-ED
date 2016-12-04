@@ -75,11 +75,13 @@ void ImprimeNiveis(ABP *Raiz, int Nivel)
 
 int FatorNodo(ABP* Nodo)
 {
+    int i;
     if(Nodo != NULL)
     {
-        return(AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
+        return (AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
     }
-    else return 0;
+    else
+        return 0;
 }
 
 //---------------------------------------------------------------------------------//
@@ -121,22 +123,6 @@ int FatorArvore(ABP *Raiz)
 
 //---------------------------------------------------------------------------------//
 
-int FatorDaArvore(ABP *a)
-{
-    int balanc;
-
-    if (a)
-    {
-        balanc=AlturaNodo(a->esq)-AlturaNodo(a->dir);
-        if(balanc < 0)
-            balanc=balanc*-1;
-        return balanc;
-    }
-    else
-        return 0;
-}
-//---------------------------------------------------------------------------------//
-
 int conta_nodos(ABP *Raiz)
 {
     if(Raiz)
@@ -145,54 +131,27 @@ int conta_nodos(ABP *Raiz)
         return 0;
 }
 
-//---------------------------------------------------------------------------------//
-AVL* InsereArvoreAVL(AVL *Raiz, int num)
-{
-    if (Raiz == NULL)
-    {
-        Raiz = (ABP*) malloc(sizeof(ABP));
-        Raiz->info = num;
-        Raiz->esq = NULL;
-        Raiz->FB   = 0;
-    }
-    else if (num < (Raiz->info))
-        Raiz->esq = InsereArvoreAVL(Raiz->esq, num);
-    else
-        Raiz->dir = InsereArvoreAVL(Raiz->dir, num);
-    return Raiz;
-}
-
 //------------------------------------------------------------------------------//
 
 int AchaNodo(ABP *Nodo, int info, double *comparacoes)
 {
     ABP *achou = NULL;
 
-    if(Nodo == NULL)
+    while(Nodo != NULL)
     {
-        return 0;
-    }
-    else
-    {
-        *comparacoes+=1;
+        *comparacoes+=2;
         if(Nodo->info == info)
-        {
             return 1;
-        }
         else
         {
-            if(info > Nodo->info)
-            {
-                *comparacoes+=1;
-                return achou = AchaNodo(Nodo->dir, info, comparacoes);
-            }
-            else if(info <= Nodo->info)
-            {
-                *comparacoes+=1;
-                return AchaNodo(Nodo->esq, info, comparacoes);
-            }
+            *comparacoes+=1;
+            if(Nodo->info > info)
+                Nodo = Nodo->esq;
+            else
+                Nodo = Nodo->dir;
         }
     }
+    return 0;
 }
 
 //------------------------------------------------------------------------------//
@@ -215,7 +174,6 @@ void Atualiza_Info(AVL **Raiz)
 void Mostra_Infos (AVL *Raiz)
 {
     printf("\n %d",Raiz->info);
-    printf("   Vai se foder Fator: %d\n",Raiz->FB);
 }
 
 //---------------------------------------------------------------------------------//
@@ -257,6 +215,124 @@ AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes)
 
 }
 
+//---------------------------------------------------------------------------------//
+
+ABP* RemoveNodo(ABP *raiz, int nodo, double *comparacoes)
+{
+    ABP *aux;
+    ABP *anterior;
+
+    aux = raiz;
+    anterior=NULL;
+    while ( (aux !=  NULL ) && (aux->info != nodo) )
+    {
+        *comparacoes+=3;
+        anterior = aux;
+        if (aux->info < nodo)
+            aux = aux->dir;
+        else
+            aux = aux->esq;
+    }
+    *comparacoes+=3;
+    if (aux != NULL)
+    {
+        *comparacoes+=1;
+        if (aux->info == nodo)
+        {
+            *comparacoes+=1;
+            if ((aux->esq == NULL) && (aux->dir == NULL)) // Ve se o nodo removido nao eh folha
+            {
+                *comparacoes+=2;
+                // Ve se não é raiz
+                if (anterior)
+                {
+                    *comparacoes+=1;
+                    // Testa se o anterior é esq ou direita e zera o pai
+                    if (anterior->info > aux->info)
+                        anterior->esq = NULL;
+                    else
+                        anterior->dir = NULL;
+                    free(aux);
+                }
+                else
+                    raiz = NULL;
+            }
+            // COMO NAO EH FOLHA SEGUE O BAILE
+            else
+            {
+                *comparacoes+=2;
+                if ( (aux->dir == NULL ) || (aux->esq == NULL) )
+                {
+                    *comparacoes+=2;
+                    if (aux->dir == NULL) // DA DIREITA EH NULL VERIFICA SE A ESQ TEM ALGO
+                    {
+                        *comparacoes+=1;
+                        if (anterior)
+                        {
+                            *comparacoes+=1;
+                            if (anterior->info < aux->info)
+                            {
+                                anterior->dir = aux->esq;
+                                free(aux);
+                            }
+                            else
+                            {
+                                anterior->esq = aux->esq;
+                                free(aux);
+                            }
+                        }
+                        else // EH RAIZ
+                        {
+                            raiz = raiz->esq;
+                        }
+                    }
+                    else
+                    {
+                        *comparacoes+=1;
+                        if (anterior)
+                        {
+                            *comparacoes+=1;
+                            if (anterior->info < aux->info)
+                            {
+                                anterior->dir = aux->dir;
+                                free(aux);
+                            }
+                            else
+                            {
+                                anterior->esq = aux->dir;
+                                free(aux);
+                            }
+                        }
+                        else // Eh RAIZ
+                        {
+                            raiz = raiz->dir;
+                        }
+                    }
+                }
+                else // NODO TEM DUAS SUB
+                {
+                    aux->info = the_maior(aux->esq, comparacoes);
+                    aux->esq = RemoveNodo(aux->esq, aux->info, comparacoes);
+                }
+            }
+        }
+    }
+    return raiz;
+}
+
+int the_maior(ABP *nodo, double *comparacoes)
+{
+    int max;
+
+    while(nodo->dir)
+    {
+        *comparacoes+=1;
+        nodo=nodo->dir;
+    }
+    *comparacoes+=1;
+    max=nodo->info;
+    return max;
+}
 //------------------------ROTAÇÕES----------------------------------------------------//
 
 AVL* rotacao_direita(AVL* Nodo)
@@ -315,63 +391,3 @@ AVL* rotacao_dupla_esquerda (AVL *Nodo)
     return Nodo;
 }
 
-// ------------------------- AUXILIAR --------------------------------//
-
-void imprimir_desenhando(AVL *node,int contadorX,int contadorY, char ch)
-{
-    if (ch==' ' && node)
-    {
-        gotoxy(X+contadorX,contadorY);
-        printTreeInfo(*node);
-        imprimir_desenhando(node->dir,6,contadorY+2,'\\');
-        imprimir_desenhando(node->esq,-6,contadorY+2,'/');
-    }
-    else if(node)
-    {
-        if(ch=='/')
-            gotoxy(X+contadorX+1,contadorY-1);
-        else
-        {
-            gotoxy(X+contadorX,contadorY-1);
-        }
-        printf("%c",ch);
-        gotoxy(X+contadorX,contadorY);
-        printTreeInfo(*node);
-        imprimir_desenhando(node->dir,contadorX+2,contadorY+2,'\\');
-        imprimir_desenhando(node->esq,contadorX-2,contadorY+2,'/');
-    }
-}
-
-//-------------------------------------------------------------------------//
-
-void printTreeInfo(AVL node)
-{
-    printf("%d ", node.info);
-}
-
-//--------------------------------------------------------------------------//
-
-/*int Intersecao (ABP *um, ABP *dois, int info)
-{
-    if(AchaNodo(um,info)&&AchaNodo(dois,info))
-        return 1;
-    else
-        return 0;
-}
-
-ABP* MontaInterseccao (ABP *um, ABP *dois, ABP **montado)
-{
-
-    if(um==NULL)
-        return *montado;
-    *montado=MontaInterseccao(um->dir,dois,montado);
-    *montado=MontaInterseccao(um->esq,dois,montado);
-    if(Intersecao(um,dois,um->info))
-    {
-        *montado=InsereArvore(*montado,um->info);
-    }
-
-    return *montado;
-
-}
-*/

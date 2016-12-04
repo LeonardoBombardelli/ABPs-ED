@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n100.txt
-********ESTATÍSTICAS ABP***********
-Tempo: 0 ms
-Nodos: 100
-Altura: 17
-Fator: 10
-Comparações: 699
-Rotações: 0
-----------------------------------
-*********VERSÃO COM ABP***********
 Inserindo dados do arquivo n1000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 1 ms
+Tempo: 0 ms
 Nodos: 1000
-Altura: 26
+Altura: 22
 Fator: 13
-Comparações: 13818
+Comparações: 10301
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n10000.txt
+Consultando dados do arquivo n1000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 5 ms
-Nodos: 10000
-Altura: 43
-Fator: 17
-Comparações: 262615
+Tempo: 1 ms
+Nodos: 1000
+Altura: 22
+Fator: 13
+Comparações: 32903
 Rotações: 0
 ----------------------------------
-*********VERSÃO COM AVL***********
-Inserindo dados do arquivo n100.txt
-********ESTATÍSTICAS AVL***********
+*********VERSÃO COM ABP***********
+Removendo dados do arquivo n1000.txt
+********ESTATÍSTICAS ABP***********
 Tempo: 0 ms
-Nodos: 100
-Altura: 5
-Fator: 1
-Comparações: 342
-Rotações: 48
+Nodos: 0
+Altura: 0
+Fator: 0
+Comparações: 37830
+Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
 Inserindo dados do arquivo n1000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 1 ms
+Tempo: 44 ms
 Nodos: 1000
-Altura: 5
-Fator: 1
-Comparações: 4357
-Rotações: 586
+Altura: 12
+Fator: 2
+Comparações: 9656
+Rotações: 1264
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo n10000.txt
+Consultando dados do arquivo n1000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 7 ms
-Nodos: 10000
-Altura: 5
-Fator: 1
-Comparações: 39774
-Rotações: 5530
+Tempo: 1 ms
+Nodos: 1000
+Altura: 12
+Fator: 2
+Comparações: 26558
+Rotações: 0
+----------------------------------
+*********VERSÃO COM AVL***********
+Removendo dados do arquivo n1000.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 40 ms
+Nodos: 0
+Altura: 0
+Fator: 0
+Comparações: 35023
+Rotações: 343
 ----------------------------------

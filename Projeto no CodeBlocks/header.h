@@ -29,11 +29,10 @@ AVL* rotacao_dupla_esquerda (AVL *Nodo);
 int FatorNodo(ABP* Nodo);
 int AlturaNodo(ABP* a);
 int conta_nodos(ABP *Raiz);
-int FatorDaArvore(ABP *a);
 int AchaNodo(ABP *Nodo, int info, double *comparacoes);
 ABP* MontaInterseccao (ABP *um, ABP *dois, ABP **montado);
 int Intersecao (ABP *um, ABP *dois, int info);
-// AUXILIAR
+int the_maior(ABP *nodo, double *comparacoes);
+ABP* RemoveNodo(ABP *raiz, int nodo, double *comparacoes);
+int FatorArvore(ABP *Raiz);
 
-void imprimir_desenhando(AVL *node,int contadorX,int contadorY, char ch);
-void printTreeInfo(AVL node);
