@@ -53,6 +53,196 @@ ABP* InsereArvore(ABP *Raiz, int num, double *comparacoes)
     return Raiz;
 }
 
+AVL* InsereAVL(AVL *a, int x, int *ok, double *comparacoes, int *rotacoes)
+{
+    /* Insere nodo em uma árvore AVL, onde A representa a raiz da árvore,
+    x, a chave a ser inserida e h a altura da árvore */
+    if (a == NULL)
+    {
+        *comparacoes+=1;
+        a = (AVL*) malloc(sizeof(AVL));
+        a->info = x;
+        a->esq = NULL;
+        a->dir = NULL;
+        a->FB = 0;
+        *ok = 1;
+    }
+    else if (x < a->info)
+    {
+        *comparacoes+=2;
+        a->esq = InsereAVL(a->esq,x,ok,comparacoes,rotacoes);
+        if (*ok)
+        {
+            switch (a->FB)
+            {
+            case -1:
+                a->FB = 0;
+                *ok = 0;
+                break;
+            case 0:
+                a->FB = 1;
+                break;
+            case 1:
+                comparacoes+=1;
+                a=Caso1(a,ok,rotacoes);
+                break;
+            }
+        }
+    }
+    else
+    {
+        comparacoes+=1;
+        a->dir = InsereAVL(a->dir,x,ok,comparacoes,rotacoes);
+        if (*ok)
+        {
+            switch (a->FB)
+            {
+            case 1:
+                a->FB = 0;
+                *ok = 0;
+                break;
+            case 0:
+                a->FB = -1;
+                break;
+            case -1:
+                comparacoes+=1;
+                a = Caso2(a,ok,rotacoes);
+                break;
+            }
+        }
+    }
+    return a;
+}
+AVL* Caso1 (AVL *a, int *ok, int *rotacoes)
+{
+    AVL *ptu;
+    ptu = a->esq;
+    if (ptu->FB == 1)
+    {
+        *rotacoes+=1;
+        a = rotacao_direita(a);
+    }
+    else
+    {
+        *rotacoes+=2;
+        a = rotacao_dupla_direita(a);
+    }
+    a->FB = 0;
+    *ok = 0;
+    return a;
+}
+
+AVL* Caso2 (AVL *a, int *ok, int *rotacoes)
+{
+    AVL *ptu;
+    ptu = a->dir;
+    if (ptu->FB == -1)
+    {
+        *rotacoes+=1;
+        a=rotacao_esquerda(a);
+    }
+    else
+    {
+        *rotacoes+=2;
+        a=rotacao_dupla_esquerda(a);
+    }
+    a->FB = 0;
+    *ok = 0;
+    return a;
+}
+
+AVL* exclui(AVL *no, int x, double *comparacoes,int *rotacoes)
+{
+    AVL *aux;
+    if (no == NULL)
+        return no;
+    *comparacoes+=2;
+    if (no->info==x)  //encontrou
+    {
+        aux=no;
+        // se não tiver filho na esquerda
+        *comparacoes+=1;
+        if (no->esq==NULL)
+            no=no->dir; //então o filho da direita substitui
+        else
+            // se não tem filho a
+            *comparacoes+=1;
+            if (no->dir==NULL)
+                no=no->esq; // então o filho da esquerda substitui
+            else  // senão possui dois filhos
+            {
+                aux=retorna_maior(&(no->esq),comparacoes); // busca o substituto
+                no->info=aux->info;
+            }
+        free (aux); // ou é folha
+        return no;
+    }
+    else
+    {
+        *comparacoes+=1;
+        if (x<no->info)
+            return (exclui(no->esq,x,comparacoes,rotacoes));
+        else
+            return (exclui(no->dir,x,comparacoes,rotacoes));
+    }
+}
+
+AVL* retorna_maior(AVL **no, double *comparacoes)
+{
+    AVL *aux;
+    aux = *no;
+    *comparacoes+=1;
+    if (aux->dir==NULL)
+    {
+        *no=(*no)->esq;
+        return aux;
+    }
+    else
+        return retorna_maior(&(*no)->dir,comparacoes);
+}
+
+AVL* verifica_avl(AVL *no,double *comparacoes,int *rotacoes)
+{
+    if (no!=NULL)
+    {
+        *comparacoes+=2;
+        if ( (AlturaNodo(no->dir) - AlturaNodo(no->esq))==-2)
+        {
+            *comparacoes+=1;
+            if ( (AlturaNodo(no->esq->dir) - AlturaNodo(no->esq->esq) )==-1)
+            {
+                *rotacoes+=1;
+                no=rotacao_direita(no);
+            }
+            else
+            {
+                *rotacoes+=2;
+                no=rotacao_dupla_direita(no);
+            }
+        }
+        else if ( (AlturaNodo(no->dir) - AlturaNodo(no->esq))==2)
+        {
+            *comparacoes+=2;
+            if((AlturaNodo(no->dir->dir)-AlturaNodo(no->dir->esq))==1)
+            {
+                *rotacoes+=1;
+                no=rotacao_esquerda(no);
+            }
+            else
+            {
+                *rotacoes+=2;
+                no=rotacao_dupla_esquerda(no);
+            }
+        }
+        *comparacoes+=2;
+        if(no->esq!=NULL)
+            no->esq=verifica_avl(no->esq,comparacoes,rotacoes);
+        *comparacoes+=1;
+        if(no->dir!=NULL)
+            no->dir=verifica_avl(no->dir,comparacoes,rotacoes);
+    }
+    return no;
+}
 //---------------------------------------------------------------------------------//
 
 void ImprimeNiveis(ABP *Raiz, int Nivel)
@@ -75,7 +265,6 @@ void ImprimeNiveis(ABP *Raiz, int Nivel)
 
 int FatorNodo(ABP* Nodo)
 {
-    int i;
     if(Nodo != NULL)
     {
         return (AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
@@ -135,8 +324,6 @@ int conta_nodos(ABP *Raiz)
 
 int AchaNodo(ABP *Nodo, int info, double *comparacoes)
 {
-    ABP *achou = NULL;
-
     while(Nodo != NULL)
     {
         *comparacoes+=2;

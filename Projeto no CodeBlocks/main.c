@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     char consulta_arquivo[20];
     char comando;
     int valor_lido,nodos;
+    int ok;
     double comparacoes,rotacoes;
     clock_t time;
     clock_t  start;
@@ -118,7 +119,11 @@ int main(int argc, char *argv[])
             }
         }
         fclose(Entrada);            // Fecho o primeiro arquivo para reseta-lo e começar a AVL
+
+
         //------------------------------------ AVL --------------------------------------//
+
+
         Entrada = fopen(argv[1], "r");
         while(!feof(Entrada))
         {
@@ -134,12 +139,11 @@ int main(int argc, char *argv[])
                 start = clock();
                 time =0;
                 rotacoes=0;
+                ok=0;
                 while(!feof(Inserindo))
                 {
                     fscanf(Inserindo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    avltree=InsereArvore(avltree,valor_lido,&comparacoes);
-                    Atualiza_Info(&avltree);
-                    avltree=Rotacao(avltree,&rotacoes,&comparacoes);
+                    avltree=InsereAVL(avltree,valor_lido,&ok,&comparacoes,&rotacoes);
                 }
                 end = clock();
                 time = 1000 * (end - start) / CLOCKS_PER_SEC;
@@ -173,9 +177,8 @@ int main(int argc, char *argv[])
                 while(!feof(Removendo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Removendo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    avltree=RemoveNodo(avltree,valor_lido,&comparacoes);
-                    Atualiza_Info(&avltree);
-                    avltree=Rotacao(avltree,&rotacoes,&comparacoes);
+                    avltree=exclui(avltree,valor_lido,&comparacoes,&rotacoes);
+                    avltree=verifica_avl(avltree,&comparacoes,&rotacoes);
                 }
                 end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
                 time = 1000 * (end - start) / CLOCKS_PER_SEC;
