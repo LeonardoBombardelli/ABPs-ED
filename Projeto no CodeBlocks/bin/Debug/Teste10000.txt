@@ -1,7 +1,7 @@
 *********VERS√O COM ABP***********
 Inserindo dados do arquivo n10000.txt
 ********ESTATÕSTICAS ABP***********
-Tempo: 12 ms
+Tempo: 9 ms
 Nodos: 10000
 Altura: 31
 Fator: 17
@@ -11,7 +11,7 @@ RotaÁıes: 0
 *********VERS√O COM ABP***********
 Consultando dados do arquivo n10000.txt
 ********ESTATÕSTICAS ABP***********
-Tempo: 5 ms
+Tempo: 3 ms
 Nodos: 10000
 Altura: 31
 Fator: 17
@@ -21,7 +21,7 @@ RotaÁıes: 0
 *********VERS√O COM ABP***********
 Removendo dados do arquivo n10000.txt
 ********ESTATÕSTICAS ABP***********
-Tempo: 6 ms
+Tempo: 4 ms
 Nodos: 0
 Altura: 0
 Fator: 0
@@ -29,9 +29,9 @@ ComparaÁıes: 534348
 RotaÁıes: 0
 ----------------------------------
 *********VERS√O COM AVL***********
-Inserindo dados do arquivo nÀ800l1txtít8
+Inserindo dados do arquivo nv00Ågtx_,a
 ********ESTATÕSTICAS AVL***********
-Tempo: 8 ms
+Tempo: 7 ms
 Nodos: 10000
 Altura: 16
 Fator: 1
@@ -39,7 +39,7 @@ ComparaÁıes: 17405
 RotaÁıes: 7019
 ----------------------------------
 *********VERS√O COM AVL***********
-Consultando dados do arquivo nÀ800l1txtít8
+Consultando dados do arquivo n10000.txt
 ********ESTATÕSTICAS AVL***********
 Tempo: 4 ms
 Nodos: 10000
@@ -51,7 +51,7 @@ RotaÁıes: 0
 *********VERS√O COM AVL***********
 Removendo dados do arquivo n10000.txt
 ********ESTATÕSTICAS AVL***********
-Tempo: 22 ms
+Tempo: 19 ms
 Nodos: 0
 Altura: 0
 Fator: 0

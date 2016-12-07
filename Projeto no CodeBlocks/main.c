@@ -9,12 +9,11 @@ int main(int argc, char *argv[])
     FILE* Saida;
     FILE* Inserindo;
     FILE* Removendo;
-    FILE* Consultando;
     ABP   *abptree,*avltree;
     char acao[40];
     char bug;
-    char insere_arquivo[20];
-    char consulta_arquivo[20];
+    char insere_arquivo[40];
+    char aux[40];
     char comando;
     int valor_lido,nodos;
     int ok;
@@ -102,9 +101,9 @@ int main(int argc, char *argv[])
             }
             if (comando == 'C')
             {
-                fscanf(Entrada, "%s",&consulta_arquivo);  // Pega o nome do arquivo do primeiro arquivo
+                fscanf(Entrada, "%s",&insere_arquivo);  // Pega o nome do arquivo do primeiro arquivo
                 fscanf(Entrada, "%c",&bug);             // Pega o lixo após
-                Consultando = fopen(consulta_arquivo,"r");  // Abre o arquivo que tem os dados
+                Inserindo = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
                 comparacoes=0;                          // Zera as variaveis e o tempo
                 start = clock();
                 time = 0;
@@ -191,7 +190,7 @@ int main(int argc, char *argv[])
             {
                 fscanf(Entrada, "%s",&insere_arquivo);  // Pega o nome do arquivo do primeiro arquivo
                 fscanf(Entrada, "%c",&bug);             // Pega o lixo após
-                Consultando = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
+                Inserindo = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
                 comparacoes=0;                          // Zera as variaveis e o tempo
                 start = clock();
                 time = 0;
