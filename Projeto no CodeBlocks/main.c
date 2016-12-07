@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     FILE* Inserindo;
     FILE* Removendo;
     FILE* Consultando;
-    ABP   *abptree=NULL,*avltree=NULL;
+    ABP   *abptree,*avltree;
     char acao[40];
     char bug;
     char insere_arquivo[20];
@@ -32,6 +32,8 @@ int main(int argc, char *argv[])
     }
     else
     {
+        abptree = InicializaArvore();
+        avltree = InicializaArvore();
         Entrada = fopen(argv[1], "r");
         if (Entrada == NULL)
         {
@@ -178,7 +180,7 @@ int main(int argc, char *argv[])
                 while(!feof(Removendo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Removendo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    avltree=deletion(avltree,valor_lido,&comparacoes,&rotacoes);
+                    avltree=RemoveAVL(avltree,valor_lido,&comparacoes,&rotacoes);
                 }
                 end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
                 time = 1000 * (end - start) / CLOCKS_PER_SEC;

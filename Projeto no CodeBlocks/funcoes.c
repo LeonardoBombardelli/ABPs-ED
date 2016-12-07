@@ -227,9 +227,15 @@ AVL* verifica_avl(AVL *no,long int *comparacoes,int *rotacoes)
     }
     return no;
 }
-AVL* inorder_succ_right_tree(AVL* root,long int *comparacoes, long int *rotacoes)
+
+/*
+
+Funcoes para remocao de nodos de AVLs foram baseadas nas funcoes do site http://www.edufyme.com/code/?id=34173cb38f07f89ddbebc2ac9128303f
+
+*/
+AVL* Pega_Arvore_Direita(AVL* Raiz,long int *comparacoes, long int *rotacoes)
 {
-    AVL* temp = root->dir;
+    AVL* temp = Raiz->dir;
     while(temp->esq)
     {
         *comparacoes+=1;
@@ -238,36 +244,36 @@ AVL* inorder_succ_right_tree(AVL* root,long int *comparacoes, long int *rotacoes
     *comparacoes+=1;
     return temp;
 }
-AVL* deletion(AVL* root, int val,long int *comparacoes, long int *rotacoes)
+
+AVL* RemoveAVL(AVL* Raiz, int val,long int *comparacoes, long int *rotacoes)
 {
-    //normal deletion
     AVL* temp;
     *comparacoes+=1;
-    if(!root)
+    if(!Raiz)
         return NULL;
     *comparacoes+=1;
-    if(root->info > val)
+    if(Raiz->info > val)
     {
-        root->esq = deletion(root->esq, val,comparacoes,rotacoes);
+        Raiz->esq = RemoveAVL(Raiz->esq, val,comparacoes,rotacoes);
     }
-    else if(root->info < val)
+    else if(Raiz->info < val)
     {
         *comparacoes+=1;
-        root->dir = deletion(root->dir, val,comparacoes,rotacoes);
+        Raiz->dir = RemoveAVL(Raiz->dir, val,comparacoes,rotacoes);
     }
     else
     {
         *comparacoes+=1;
         *comparacoes+=1;
-        if(root->esq == NULL || root->dir == NULL)
+        if(Raiz->esq == NULL || Raiz->dir == NULL)
         {
             *comparacoes+=1;
-            if(root->esq)
-                temp = root->esq;
-            else if(root->dir)
+            if(Raiz->esq)
+                temp = Raiz->esq;
+            else if(Raiz->dir)
             {
                 *comparacoes+=1;
-                temp = root->dir;
+                temp = Raiz->dir;
             }
             else
             {
@@ -275,62 +281,64 @@ AVL* deletion(AVL* root, int val,long int *comparacoes, long int *rotacoes)
                 *comparacoes+=1;
                 temp = NULL;
             }
-            root = NULL;
-            free(root);
+            Raiz = NULL;
+            free(Raiz);
             return temp;
         }
         else
         {
-            temp = inorder_succ_right_tree(root,comparacoes,rotacoes);
-            root->info = temp->info;
-            root->dir = deletion(root->dir,temp->info,comparacoes,rotacoes);
+            temp = Pega_Arvore_Direita(Raiz,comparacoes,rotacoes);
+            Raiz->info = temp->info;
+            Raiz->dir = RemoveAVL(Raiz->dir,temp->info,comparacoes,rotacoes);
         }
     }
     *comparacoes+=1;
-    if(root)
+    if(Raiz)
     {
-        //update height
-        root->altura = max(get_height(root->esq,comparacoes,rotacoes), get_height(root->dir,comparacoes,rotacoes)) + 1;
-        int balance = get_balance(root,comparacoes,rotacoes);
+        Raiz->altura = max(Pega_Altura(Raiz->esq,comparacoes,rotacoes), Pega_Altura(Raiz->dir,comparacoes,rotacoes)) + 1;
+        int balance = Pega_Balanceamento(Raiz,comparacoes,rotacoes);
         *comparacoes+=1;
         if(balance > 1 || balance < -1)
-            root = balance_tree(root,comparacoes,rotacoes);
+        {
+            Raiz = Balanceamento_Arvore(Raiz,comparacoes,rotacoes);
+        }
     }
-    return root;
+    return Raiz;
 }
-int get_balance(AVL* root,long int *comparacoes, long int *rotacoes)
+int Pega_Balanceamento(AVL* Raiz,long int *comparacoes, long int *rotacoes)
 {
     *comparacoes+=1;
-    if(!root)
+    if(!Raiz)
         return 0;
-    return (get_height(root->esq,comparacoes,rotacoes) - get_height(root->dir,comparacoes,rotacoes));
+    return (Pega_Altura(Raiz->esq,comparacoes,rotacoes) - Pega_Altura(Raiz->dir,comparacoes,rotacoes));
 }
-int get_height(AVL* root,long int *comparacoes, long int *rotacoes)
+int Pega_Altura(AVL* Raiz,long int *comparacoes, long int *rotacoes)
 {
     *comparacoes+=1;
-    if(!root)
+    if(!Raiz)
         return 0;
     else
-        return root->altura;
+        return Raiz->altura;
 }
-AVL* balance_tree(AVL* root,long int *comparacoes, long int *rotacoes)
+
+AVL* Balanceamento_Arvore(AVL* Raiz,long int *comparacoes, long int *rotacoes)
 {
     AVL* x, *y;
-    int lheight,rheight;
-    lheight = get_height(root->esq,comparacoes,rotacoes);
-    rheight = get_height(root->dir,comparacoes,rotacoes);
+    int AlturaEsq,AlturaDir;
+    AlturaEsq = Pega_Altura(Raiz->esq,comparacoes,rotacoes);
+    AlturaDir = Pega_Altura(Raiz->dir,comparacoes,rotacoes);
     *comparacoes+=1;
-    if(lheight >= rheight)
-        x = root->esq;
+    if(AlturaEsq >= AlturaDir)
+        x = Raiz->esq;
     else
-        x = root->dir;
-    lheight = get_height(x->esq,comparacoes,rotacoes);
-    rheight = get_height(x->dir,comparacoes,rotacoes);
+        x = Raiz->dir;
+    AlturaEsq = Pega_Altura(x->esq,comparacoes,rotacoes);
+    AlturaDir = Pega_Altura(x->dir,comparacoes,rotacoes);
     *comparacoes+=1;
-    if(x == root->esq)
+    if(x == Raiz->esq)
     {
         *comparacoes+=1;
-        if(lheight >= rheight)
+        if(AlturaEsq >= AlturaDir)
         {
             y = x->esq;
         }
@@ -338,53 +346,54 @@ AVL* balance_tree(AVL* root,long int *comparacoes, long int *rotacoes)
             y = x->dir;
     }
     *comparacoes+=1;
-    if(x == root->dir)
+    if(x == Raiz->dir)
     {
         *comparacoes+=1;
-        if(lheight > rheight)
+        if(AlturaEsq > AlturaDir)
         {
             y = x->esq;
         }
         else
             y = x->dir;
     }
-    //left-left case
+
     *comparacoes+=1;
-    if(root->esq == x && x->esq == y)
+    if(Raiz->esq == x && x->esq == y)
     {
         *rotacoes+=1;
-        root = rotacao_direita(root);
+        Raiz = rotacao_direita(Raiz);
     }
-    //right-right case
-    else if(x == root->dir && x->dir == y)
+
+    else if(x == Raiz->dir && x->dir == y)
     {
         *comparacoes+=1;
         *rotacoes+=1;
-        root = rotacao_esquerda(root);
+        Raiz = rotacao_esquerda(Raiz);
     }
-    //left-right case
-    else if(x == root->esq && y == x->dir)
-    {
-        *comparacoes+=1;
-        *comparacoes+=1;
-        *rotacoes+=1;
-        *rotacoes+=1;
-        root->esq = rotacao_esquerda(root->esq);
-        root = rotacao_direita(root);
-    }
-    //right-left case
-    else if(x == root->dir && y == x->esq)
+
+    else if(x == Raiz->esq && y == x->dir)
     {
         *comparacoes+=1;
         *comparacoes+=1;
+        *rotacoes+=1;
+        *rotacoes+=1;
+        Raiz->esq = rotacao_esquerda(Raiz->esq);
+        Raiz = rotacao_direita(Raiz);
+    }
+
+    else if(x == Raiz->dir && y == x->esq)
+    {
+        *comparacoes+=1;
+        *comparacoes+=1;
         *comparacoes+=1;
         *rotacoes+=1;
         *rotacoes+=1;
-        root->dir = rotacao_direita(root->dir);
-        root = rotacao_esquerda(root);
+        Raiz->dir = rotacao_direita(Raiz->dir);
+        Raiz = rotacao_esquerda(Raiz);
     }
-    return root;
+    return Raiz;
 }
+
 //---------------------------------------------------------------------------------//
 
 void ImprimeNiveis(ABP *Raiz, int Nivel)

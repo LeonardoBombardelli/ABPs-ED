@@ -27,12 +27,11 @@ AVL* InsereAVL(AVL *a, int x,int *ok, long int *comparacoes, int *rotacoes);
 AVL* Caso1 (AVL *a, int *ok, int *rotacoes);
 AVL* Caso2 (AVL *a, int *ok, int *rotacoes);
 AVL* retorna_maior(AVL **no, long int *comparacoes);
-AVL* balance_tree(AVL* root,long int *comparacoes, long int *rotacoes);
-AVL* deletion(AVL* root, int val,long int *comparacoes, long int *rotacoes);
-AVL* inorder_succ_right_tree(AVL* root,long int *comparacoes, long int *rotacoes);
-int get_balance(AVL* root,long int *comparacoes, long int *rotacoes);
-AVL* balance_tree(AVL* root,long int *comparacoes, long int *rotacoes);
-int get_height(AVL* root,long int *comparacoes, long int *rotacoes);
+AVL* Pega_Arvore_Direita(AVL* Raiz,long int *comparacoes, long int *rotacoes);
+AVL* RemoveAVL(AVL* Raiz, int val,long int *comparacoes, long int *rotacoes);
+int Pega_Balanceamento(AVL* Raiz,long int *comparacoes, long int *rotacoes);
+int Pega_Altura(AVL* Raiz,long int *comparacoes, long int *rotacoes);
+AVL* Balanceamento_Arvore(AVL* Raiz,long int *comparacoes, long int *rotacoes);
 
 
 // FUNCOES QUE AS DUAS USAM
