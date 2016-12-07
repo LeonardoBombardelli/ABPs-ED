@@ -111,21 +111,20 @@ AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
             }
         }
     }
-    a->altura=AlturaNodoAVL(a, comparacoes);
+    a->altura=AlturaNodoAVL(a);
     return a;
 }
-int AlturaNodoAVL(AVL *T, int *comparacoes)
+int AlturaNodoAVL(AVL *T)
 {
     int lh,rh;
-    *comparacoes+=1;
     if(T==NULL)
         return(0);
-    *comparacoes+=1;
+
     if(T->esq==NULL)
         lh=0;
     else
         lh=1+T->esq->altura;
-    *comparacoes+=1;
+
     if(T->dir==NULL)
         rh=0;
     else
