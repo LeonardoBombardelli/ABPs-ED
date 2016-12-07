@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n100000.txt
+Inserindo dados do arquivo n1000000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 246 ms
-Nodos: 100000
-Altura: 480
-Fator: 464
-Comparações: 16793479
+Tempo: 61328 ms
+Nodos: 1000000
+Altura: 6771
+Fator: 6750
+Comparações: -1016311672
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Consultando dados do arquivo n100000.txt
+Consultando dados do arquivo n1000000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 163 ms
-Nodos: 100000
-Altura: 480
-Fator: 464
-Comparações: 50580437
+Tempo: 48726 ms
+Nodos: 1000000
+Altura: 6771
+Fator: 6750
+Comparações: 1248032280
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Removendo dados do arquivo n100000.txt
+Removendo dados do arquivo n1000000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 163 ms
+Tempo: 8459 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 48520108
+Comparações: -1885428387
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo nP510UÃ.t‘º
+Inserindo dados do arquivo n-;0Hj6.À€w
 ********ESTATÍSTICAS AVL***********
-Tempo: 99 ms
-Nodos: 100000
-Altura: 20
+Tempo: 1024 ms
+Nodos: 1000000
+Altura: 24
 Fator: 1
-Comparações: 136367
-Rotações: 70419
+Comparações: 5278160
+Rotações: 703121
 ----------------------------------
 *********VERSÃO COM AVL***********
-Consultando dados do arquivo nP510UÃ.t‘º
+Consultando dados do arquivo n-;0Hj6.À€w
 ********ESTATÍSTICAS AVL***********
-Tempo: 69 ms
-Nodos: 100000
-Altura: 20
+Tempo: 702 ms
+Nodos: 1000000
+Altura: 24
 Fator: 1
-Comparações: 4706423
+Comparações: 57043376
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Removendo dados do arquivo n100000.txt
+Removendo dados do arquivo n1000000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 1644 ms
+Tempo: 24682 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 355575604
-Rotações: 13494526
+Comparações: 925312591
+Rotações: 191502959
 ----------------------------------

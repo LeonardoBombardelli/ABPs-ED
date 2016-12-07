@@ -189,9 +189,9 @@ int main(int argc, char *argv[])
             }
             if (comando == 'C')
             {
-                fscanf(Entrada, "%s",&consulta_arquivo);  // Pega o nome do arquivo do primeiro arquivo
+                fscanf(Entrada, "%s",&insere_arquivo);  // Pega o nome do arquivo do primeiro arquivo
                 fscanf(Entrada, "%c",&bug);             // Pega o lixo após
-                Consultando = fopen(consulta_arquivo,"r");  // Abre o arquivo que tem os dados
+                Consultando = fopen(insere_arquivo,"r");  // Abre o arquivo que tem os dados
                 comparacoes=0;                          // Zera as variaveis e o tempo
                 start = clock();
                 time = 0;

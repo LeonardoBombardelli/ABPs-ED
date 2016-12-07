@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n100000.txt
+Inserindo dados do arquivo n100.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 246 ms
-Nodos: 100000
-Altura: 480
-Fator: 464
-Comparações: 16793479
+Tempo: 0 ms
+Nodos: 100
+Altura: 17
+Fator: 10
+Comparações: 699
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Consultando dados do arquivo n100000.txt
+Consultando dados do arquivo n100.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 163 ms
-Nodos: 100000
-Altura: 480
-Fator: 464
-Comparações: 50580437
+Tempo: 0 ms
+Nodos: 100
+Altura: 17
+Fator: 10
+Comparações: 2297
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Removendo dados do arquivo n100000.txt
+Removendo dados do arquivo n100.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 163 ms
+Tempo: 0 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 48520108
+Comparações: 2862
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo nP510UÃ.t‘º
+Inserindo dados do arquivo n100.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 99 ms
-Nodos: 100000
-Altura: 20
+Tempo: 0 ms
+Nodos: 100
+Altura: 8
 Fator: 1
-Comparações: 136367
-Rotações: 70419
+Comparações: 201
+Rotações: 74
 ----------------------------------
 *********VERSÃO COM AVL***********
-Consultando dados do arquivo nP510UÃ.t‘º
+Consultando dados do arquivo n100.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 69 ms
-Nodos: 100000
-Altura: 20
+Tempo: 0 ms
+Nodos: 100
+Altura: 8
 Fator: 1
-Comparações: 4706423
+Comparações: 1673
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Removendo dados do arquivo n100000.txt
+Removendo dados do arquivo n100.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 1644 ms
+Tempo: 0 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 355575604
-Rotações: 13494526
+Comparações: 7813
+Rotações: 303
 ----------------------------------
