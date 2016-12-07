@@ -30,7 +30,7 @@ AVL* InicializaAvl()
 
 //---------------------------------------------------------------------------------//
 
-ABP* InsereArvore(ABP *Raiz, int num, long int *comparacoes)
+ABP* InsereArvore(ABP *Raiz, int num,long long int *comparacoes)
 {
     if (Raiz == NULL)
     {
@@ -53,7 +53,7 @@ ABP* InsereArvore(ABP *Raiz, int num, long int *comparacoes)
     return Raiz;
 }
 
-AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
+AVL* InsereAVL(AVL *a, int x, int *ok,long long int *comparacoes,long long int*rotacoes)
 {
     /* Insere nodo em uma árvore AVL, onde A representa a raiz da árvore,
     x, a chave a ser inserida e h a altura da árvore */
@@ -91,7 +91,7 @@ AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
     }
     else
     {
-        comparacoes+=1;
+        *comparacoes+=1;
         a->dir = InsereAVL(a->dir,x,ok,comparacoes,rotacoes);
         if (*ok)
         {
@@ -105,7 +105,7 @@ AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
                 a->FB = -1;
                 break;
             case -1:
-                comparacoes+=1;
+                *comparacoes+=1;
                 a = Caso2(a,ok,rotacoes, comparacoes);
                 break;
             }
@@ -134,7 +134,7 @@ int AlturaNodoAVL(AVL *T)
         return(lh);
     return(rh);
 }
-AVL* Caso1 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
+AVL* Caso1 (AVL *a, int *ok,long long int *rotacoes,long long int *comparacoes)
 {
     AVL *ptu;
     ptu = a->esq;
@@ -154,7 +154,7 @@ AVL* Caso1 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
     return a;
 }
 
-AVL* Caso2 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
+AVL* Caso2 (AVL *a, int *ok,long long int *rotacoes,long long int *comparacoes)
 {
     AVL *ptu;
     ptu = a->dir;
@@ -173,7 +173,7 @@ AVL* Caso2 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
     *ok = 0;
     return a;
 }
-AVL* retorna_maior(AVL **no, long int *comparacoes)
+AVL* retorna_maior(AVL **no,long long int *comparacoes)
 {
     AVL *aux;
     aux = *no;
@@ -187,55 +187,13 @@ AVL* retorna_maior(AVL **no, long int *comparacoes)
         return retorna_maior(&(*no)->dir,comparacoes);
 }
 
-AVL* verifica_avl(AVL *no,long int *comparacoes,int *rotacoes)
-{
-    if (no!=NULL)
-    {
-        *comparacoes+=2;
-        if ( (AlturaNodo(no->dir) - AlturaNodo(no->esq))==-2)
-        {
-            *comparacoes+=1;
-            if ( (AlturaNodo(no->esq->dir) - AlturaNodo(no->esq->esq) )==-1)
-            {
-                *rotacoes+=1;
-                no=rotacao_direita(no);
-            }
-            else
-            {
-                *rotacoes+=2;
-                no=rotacao_dupla_direita(no);
-            }
-        }
-        else if ( (AlturaNodo(no->dir) - AlturaNodo(no->esq))==2)
-        {
-            *comparacoes+=2;
-            if((AlturaNodo(no->dir->dir)-AlturaNodo(no->dir->esq))==1)
-            {
-                *rotacoes+=1;
-                no=rotacao_esquerda(no);
-            }
-            else
-            {
-                *rotacoes+=2;
-                no=rotacao_dupla_esquerda(no);
-            }
-        }
-        *comparacoes+=2;
-        if(no->esq!=NULL)
-            no->esq=verifica_avl(no->esq,comparacoes,rotacoes);
-        *comparacoes+=1;
-        if(no->dir!=NULL)
-            no->dir=verifica_avl(no->dir,comparacoes,rotacoes);
-    }
-    return no;
-}
 
 /*
 
 Funcoes para remocao de nodos de AVLs foram baseadas nas funcoes do site http://www.edufyme.com/code/?id=34173cb38f07f89ddbebc2ac9128303f
 
 */
-AVL* Pega_Arvore_Direita(AVL* Raiz,long int *comparacoes, long int *rotacoes)
+AVL* Pega_Arvore_Direita(AVL* Raiz,long long int *comparacoes,long long int *rotacoes)
 {
     AVL* temp = Raiz->dir;
     while(temp->esq)
@@ -247,7 +205,7 @@ AVL* Pega_Arvore_Direita(AVL* Raiz,long int *comparacoes, long int *rotacoes)
     return temp;
 }
 
-AVL* RemoveAVL(AVL* Raiz, int val,long int *comparacoes, long int *rotacoes)
+AVL* RemoveAVL(AVL* Raiz, int val,long long int *comparacoes,long long int *rotacoes)
 {
     AVL* temp;
     *comparacoes+=1;
@@ -307,14 +265,15 @@ AVL* RemoveAVL(AVL* Raiz, int val,long int *comparacoes, long int *rotacoes)
     }
     return Raiz;
 }
-int Pega_Balanceamento(AVL* Raiz,long int *comparacoes, long int *rotacoes)
+int Pega_Balanceamento(AVL* Raiz,long long int *comparacoes,long long int*rotacoes)
 {
     *comparacoes+=1;
     if(!Raiz)
         return 0;
     return (Pega_Altura(Raiz->esq,comparacoes,rotacoes) - Pega_Altura(Raiz->dir,comparacoes,rotacoes));
 }
-int Pega_Altura(AVL* Raiz,long int *comparacoes, long int *rotacoes)
+
+int Pega_Altura(AVL* Raiz,long long int *comparacoes,long long int *rotacoes)
 {
     *comparacoes+=1;
     if(!Raiz)
@@ -323,7 +282,7 @@ int Pega_Altura(AVL* Raiz,long int *comparacoes, long int *rotacoes)
         return Raiz->altura;
 }
 
-AVL* Balanceamento_Arvore(AVL* Raiz,long int *comparacoes, long int *rotacoes)
+AVL* Balanceamento_Arvore(AVL* Raiz,long long int *comparacoes,long long int *rotacoes)
 {
     AVL* x, *y;
     int AlturaEsq,AlturaDir;
@@ -420,7 +379,7 @@ int FatorNodo(ABP* Nodo)
 {
     if(Nodo != NULL)
     {
-        return (AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir));
+        return abs((AlturaNodo(Nodo->esq) - AlturaNodo(Nodo->dir)));
     }
     else
         return 0;
@@ -475,7 +434,7 @@ int conta_nodos(ABP *Raiz)
 
 //------------------------------------------------------------------------------//
 
-int AchaNodo(ABP *Nodo, int info, long int *comparacoes)
+int AchaNodo(ABP *Nodo, int info,long long int *comparacoes)
 {
     while(Nodo != NULL)
     {
@@ -518,7 +477,7 @@ void Mostra_Infos (AVL *Raiz)
 
 //---------------------------------------------------------------------------------//
 
-AVL* Rotacao (AVL *Nodo,int *rotacoes,long int *comparacoes)
+AVL* Rotacao (AVL *Nodo,int *rotacoes,long long int *comparacoes)
 {
     if (Nodo)
     {
@@ -557,7 +516,7 @@ AVL* Rotacao (AVL *Nodo,int *rotacoes,long int *comparacoes)
 
 //---------------------------------------------------------------------------------//
 
-ABP* RemoveNodo(ABP *raiz, int nodo, long int *comparacoes)
+ABP* RemoveNodo(ABP *raiz, int nodo,long long int *comparacoes)
 {
     ABP *aux;
     ABP *anterior;
@@ -660,7 +619,7 @@ ABP* RemoveNodo(ABP *raiz, int nodo, long int *comparacoes)
     return raiz;
 }
 
-int the_maior(ABP *nodo, long int *comparacoes)
+int the_maior(ABP *nodo,long long int *comparacoes)
 {
     int max;
 

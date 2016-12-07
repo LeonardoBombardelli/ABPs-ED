@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 59383 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 3278655624
+Tempo: 61975 ms
+Nodos: 100000
+Altura: 100000
+Fator: 99999
+Comparações: 4999950000
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 48952 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 9837966872
+Tempo: 25840 ms
+Nodos: 100000
+Altura: 100000
+Fator: 99999
+Comparações: 15000050000
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 9876 ms
+Tempo: 19 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 2409538909
+Comparações: 999997
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 877 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 49 ms
+Nodos: 100000
+Altura: 17
 Fator: 1
-Comparações: 32559488
-Rotações: 703121
+Comparações: 1868895
+Rotações: 99983
 ----------------------------------
 *********VERSÃO COM AVL***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 516 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 26 ms
+Nodos: 100000
+Altura: 17
 Fator: 1
-Comparações: 57043376
+Comparações: 4606838
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n100000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 27815 ms
+Tempo: 91 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 5220279887
-Rotações: 191502959
+Comparações: 20780013
+Rotações: 50751
 ----------------------------------

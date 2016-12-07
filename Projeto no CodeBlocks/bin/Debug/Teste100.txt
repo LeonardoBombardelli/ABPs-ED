@@ -29,13 +29,13 @@ Comparações: 2862
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo nk00.„xt
+Inserindo dados do arquivo n100.txt
 ********ESTATÍSTICAS AVL***********
 Tempo: 0 ms
 Nodos: 100
 Altura: 8
 Fator: 1
-Comparações: 201
+Comparações: 961
 Rotações: 74
 ----------------------------------
 *********VERSÃO COM AVL***********

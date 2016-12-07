@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 59383 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 3278655624
+Tempo: 9 ms
+Nodos: 1000
+Altura: 1000
+Fator: 999
+Comparações: 499500
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 48952 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 9837966872
+Tempo: 5 ms
+Nodos: 1000
+Altura: 1000
+Fator: 999
+Comparações: 1500500
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 9876 ms
+Tempo: 1 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 2409538909
+Comparações: 9997
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 877 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 1 ms
+Nodos: 1000
+Altura: 10
 Fator: 1
-Comparações: 32559488
-Rotações: 703121
+Comparações: 11957
+Rotações: 990
 ----------------------------------
 *********VERSÃO COM AVL***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 516 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 1 ms
+Nodos: 1000
+Altura: 10
 Fator: 1
-Comparações: 57043376
+Comparações: 25961
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n1000sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 27815 ms
+Tempo: 1 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 5220279887
-Rotações: 191502959
+Comparações: 110334
+Rotações: 563
 ----------------------------------

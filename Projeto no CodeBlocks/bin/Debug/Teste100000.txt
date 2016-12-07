@@ -1,7 +1,7 @@
 *********VERSÃO COM ABP***********
 Inserindo dados do arquivo n100000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 221 ms
+Tempo: 265 ms
 Nodos: 100000
 Altura: 480
 Fator: 464
@@ -11,7 +11,7 @@ Rotações: 0
 *********VERSÃO COM ABP***********
 Consultando dados do arquivo n100000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 143 ms
+Tempo: 148 ms
 Nodos: 100000
 Altura: 480
 Fator: 464
@@ -21,7 +21,7 @@ Rotações: 0
 *********VERSÃO COM ABP***********
 Removendo dados do arquivo n100000.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 138 ms
+Tempo: 146 ms
 Nodos: 0
 Altura: 0
 Fator: 0
@@ -29,19 +29,19 @@ Comparações: 48520108
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo n¥030	1tì	
+Inserindo dados do arquivo n100000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 74 ms
+Tempo: 71 ms
 Nodos: 100000
 Altura: 20
 Fator: 1
-Comparações: 136367
+Comparações: 2509449
 Rotações: 70419
 ----------------------------------
 *********VERSÃO COM AVL***********
 Consultando dados do arquivo n100000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 44 ms
+Tempo: 41 ms
 Nodos: 100000
 Altura: 20
 Fator: 1
@@ -51,7 +51,7 @@ Rotações: 0
 *********VERSÃO COM AVL***********
 Removendo dados do arquivo n100000.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 1619 ms
+Tempo: 1720 ms
 Nodos: 0
 Altura: 0
 Fator: 0

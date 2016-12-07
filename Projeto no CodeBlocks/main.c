@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     char comando;
     int valor_lido,nodos;
     int ok;
-    long int comparacoes;
-    int rotacoes;
+    long long int comparacoes;
+    long long int rotacoes;
     clock_t time;
     clock_t  start;
     clock_t  end;
@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
                 fprintf(Saida,"Nodos: %d\n",conta_nodos(abptree));
                 fprintf(Saida,"Altura: %d\n",AlturaNodo(abptree));
                 fprintf(Saida,"Fator: %d\n",FatorArvore(abptree));
-                fprintf(Saida,"Comparações: %.0ld\n",comparacoes);
-                fprintf(Saida,"Rotações: %d\n",rotacoes);
+                fprintf(Saida,"Comparações: %lld\n",comparacoes);
+                fprintf(Saida,"Rotações: %lld\n",rotacoes);
                 fprintf(Saida,"----------------------------------\n");
             }
             if (comando == 'R')
@@ -161,8 +161,8 @@ int main(int argc, char *argv[])
                 fprintf(Saida,"Nodos: %d\n",conta_nodos(avltree));
                 fprintf(Saida,"Altura: %d\n",AlturaNodo(avltree));
                 fprintf(Saida,"Fator: %d\n",FatorArvore(avltree));
-                fprintf(Saida,"Comparações: %.0ld\n",comparacoes);
-                fprintf(Saida,"Rotações: %d\n",rotacoes);
+                fprintf(Saida,"Comparações: %lld\n",comparacoes);
+                fprintf(Saida,"Rotações: %lld\n",rotacoes);
                 fprintf(Saida,"----------------------------------\n");
             }
 

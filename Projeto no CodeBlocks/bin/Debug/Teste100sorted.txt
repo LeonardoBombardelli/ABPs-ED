@@ -1,60 +1,60 @@
 *********VERSÃO COM ABP***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 59383 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 3278655624
+Tempo: 0 ms
+Nodos: 100
+Altura: 100
+Fator: 99
+Comparações: 4950
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 48952 ms
-Nodos: 1000000
-Altura: 6771
-Fator: 6756
-Comparações: 9837966872
+Tempo: 0 ms
+Nodos: 100
+Altura: 100
+Fator: 99
+Comparações: 15050
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM ABP***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS ABP***********
-Tempo: 9876 ms
+Tempo: 0 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 2409538909
+Comparações: 997
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Inserindo dados do arquivo n1000000.txt
+Inserindo dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 877 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 0 ms
+Nodos: 100
+Altura: 7
 Fator: 1
-Comparações: 32559488
-Rotações: 703121
+Comparações: 859
+Rotações: 93
 ----------------------------------
 *********VERSÃO COM AVL***********
-Consultando dados do arquivo n1000000.txt
+Consultando dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 516 ms
-Nodos: 1000000
-Altura: 24
+Tempo: 0 ms
+Nodos: 100
+Altura: 7
 Fator: 1
-Comparações: 57043376
+Comparações: 1640
 Rotações: 0
 ----------------------------------
 *********VERSÃO COM AVL***********
-Removendo dados do arquivo n1000000.txt
+Removendo dados do arquivo n100sorted.txt
 ********ESTATÍSTICAS AVL***********
-Tempo: 27815 ms
+Tempo: 0 ms
 Nodos: 0
 Altura: 0
 Fator: 0
-Comparações: 5220279887
-Rotações: 191502959
+Comparações: 6135
+Rotações: 61
 ----------------------------------
