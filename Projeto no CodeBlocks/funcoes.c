@@ -84,7 +84,7 @@ AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
                 break;
             case 1:
                 comparacoes+=1;
-                a=Caso1(a,ok,rotacoes);
+                a=Caso1(a,ok,rotacoes, comparacoes);
                 break;
             }
         }
@@ -106,25 +106,26 @@ AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
                 break;
             case -1:
                 comparacoes+=1;
-                a = Caso2(a,ok,rotacoes);
+                a = Caso2(a,ok,rotacoes, comparacoes);
                 break;
             }
         }
     }
-    a->altura=AlturaNodoAVL(a);
+    a->altura=AlturaNodoAVL(a, comparacoes);
     return a;
 }
-int AlturaNodoAVL(AVL *T)
+int AlturaNodoAVL(AVL *T, int *comparacoes)
 {
     int lh,rh;
+    *comparacoes+=1;
     if(T==NULL)
         return(0);
-
+    *comparacoes+=1;
     if(T->esq==NULL)
         lh=0;
     else
         lh=1+T->esq->altura;
-
+    *comparacoes+=1;
     if(T->dir==NULL)
         rh=0;
     else
@@ -134,10 +135,11 @@ int AlturaNodoAVL(AVL *T)
         return(lh);
     return(rh);
 }
-AVL* Caso1 (AVL *a, int *ok, int *rotacoes)
+AVL* Caso1 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
 {
     AVL *ptu;
     ptu = a->esq;
+    *comparacoes+=1;
     if (ptu->FB == 1)
     {
         *rotacoes+=1;
@@ -153,10 +155,11 @@ AVL* Caso1 (AVL *a, int *ok, int *rotacoes)
     return a;
 }
 
-AVL* Caso2 (AVL *a, int *ok, int *rotacoes)
+AVL* Caso2 (AVL *a, int *ok, int *rotacoes, int *comparacoes)
 {
     AVL *ptu;
     ptu = a->dir;
+    *comparacoes+=1;
     if (ptu->FB == -1)
     {
         *rotacoes+=1;
