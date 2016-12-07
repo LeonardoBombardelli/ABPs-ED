@@ -8,14 +8,6 @@
 
 //---------------------------------------------------------------------------------//
 
-void gotoxy(int x, int y)
-{
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),(COORD)
-    {
-        x-1,y-1
-    });
-}
-
 //==================================================================================//
 
 ABP* InicializaArvore()
@@ -53,7 +45,9 @@ ABP* InsereArvore(ABP *Raiz, int num,long long int *comparacoes)
     return Raiz;
 }
 
+
 AVL* InsereAVL(AVL *a, int x, int *ok,long long int *comparacoes,long long int*rotacoes)
+/*  Retirado do Moodle */
 {
     /* Insere nodo em uma árvore AVL, onde A representa a raiz da árvore,
     x, a chave a ser inserida e h a altura da árvore */
@@ -114,7 +108,8 @@ AVL* InsereAVL(AVL *a, int x, int *ok,long long int *comparacoes,long long int*r
     a->altura=AlturaNodoAVL(a);
     return a;
 }
-int AlturaNodoAVL(AVL *T)
+
+int AlturaNodoAVL(AVL *T) //Recebe raiz, retorna altura
 {
     int lh,rh;
     if(T==NULL)
@@ -134,7 +129,9 @@ int AlturaNodoAVL(AVL *T)
         return(lh);
     return(rh);
 }
+
 AVL* Caso1 (AVL *a, int *ok,long long int *rotacoes,long long int *comparacoes)
+/*  Retirado do Moodle */
 {
     AVL *ptu;
     ptu = a->esq;
@@ -155,6 +152,7 @@ AVL* Caso1 (AVL *a, int *ok,long long int *rotacoes,long long int *comparacoes)
 }
 
 AVL* Caso2 (AVL *a, int *ok,long long int *rotacoes,long long int *comparacoes)
+/*  Retirado do Moodle */
 {
     AVL *ptu;
     ptu = a->dir;
@@ -189,9 +187,7 @@ AVL* retorna_maior(AVL **no,long long int *comparacoes)
 
 
 /*
-
 Funcoes para remocao de nodos de AVLs foram baseadas nas funcoes do site http://www.edufyme.com/code/?id=34173cb38f07f89ddbebc2ac9128303f
-
 */
 AVL* Pega_Arvore_Direita(AVL* Raiz,long long int *comparacoes,long long int *rotacoes)
 {
@@ -222,11 +218,13 @@ AVL* RemoveAVL(AVL* Raiz, int val,long long int *comparacoes,long long int *rota
         Raiz->dir = RemoveAVL(Raiz->dir, val,comparacoes,rotacoes);
     }
     else
+        //Se chegou aqui, val = Raiz->info
     {
         *comparacoes+=1;
         *comparacoes+=1;
         if(Raiz->esq == NULL || Raiz->dir == NULL)
         {
+            //Se um dos nodos forem vazios, apenas deslocamos seu nodo filho para sua posicao
             *comparacoes+=1;
             if(Raiz->esq)
                 temp = Raiz->esq;
@@ -235,7 +233,7 @@ AVL* RemoveAVL(AVL* Raiz, int val,long long int *comparacoes,long long int *rota
                 *comparacoes+=1;
                 temp = Raiz->dir;
             }
-            else
+            else    //Se ambos forem vazios, nodo a ser eliminado = nodo folha
             {
                 *comparacoes+=1;
                 *comparacoes+=1;
@@ -245,15 +243,15 @@ AVL* RemoveAVL(AVL* Raiz, int val,long long int *comparacoes,long long int *rota
             free(Raiz);
             return temp;
         }
-        else
+        else    //So entra aqui se nodo a ser removido tem 2 nodos filhos
         {
             temp = Pega_Arvore_Direita(Raiz,comparacoes,rotacoes);
-            Raiz->info = temp->info;
-            Raiz->dir = RemoveAVL(Raiz->dir,temp->info,comparacoes,rotacoes);
+            Raiz->info = temp->info; //Pega o menor nodo do filho direito e coloca no lugar da raiz
+            Raiz->dir = RemoveAVL(Raiz->dir,temp->info,comparacoes,rotacoes); //Remove menor (certamente e nodo folha/1 filho)
         }
     }
     *comparacoes+=1;
-    if(Raiz)
+    if(Raiz)    //Balanceia arvore de novo
     {
         Raiz->altura = max(Pega_Altura(Raiz->esq,comparacoes,rotacoes), Pega_Altura(Raiz->dir,comparacoes,rotacoes)) + 1;
         int balance = Pega_Balanceamento(Raiz,comparacoes,rotacoes);
@@ -265,6 +263,7 @@ AVL* RemoveAVL(AVL* Raiz, int val,long long int *comparacoes,long long int *rota
     }
     return Raiz;
 }
+
 int Pega_Balanceamento(AVL* Raiz,long long int *comparacoes,long long int*rotacoes)
 {
     *comparacoes+=1;
@@ -689,4 +688,3 @@ AVL* rotacao_dupla_esquerda (AVL *Nodo)
     Nodo = aux2;
     return Nodo;
 }
-
