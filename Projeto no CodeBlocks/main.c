@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
     char comando;
     int valor_lido,nodos;
     int ok;
-    double comparacoes,rotacoes;
+    long int comparacoes;
+    int rotacoes;
     clock_t time;
     clock_t  start;
     clock_t  end;
@@ -72,8 +73,8 @@ int main(int argc, char *argv[])
                 fprintf(Saida,"Nodos: %d\n",conta_nodos(abptree));
                 fprintf(Saida,"Altura: %d\n",AlturaNodo(abptree));
                 fprintf(Saida,"Fator: %d\n",FatorArvore(abptree));
-                fprintf(Saida,"Comparações: %.0lf\n",comparacoes);
-                fprintf(Saida,"Rotações: %.0lf\n",rotacoes);
+                fprintf(Saida,"Comparações: %.0ld\n",comparacoes);
+                fprintf(Saida,"Rotações: %d\n",rotacoes);
                 fprintf(Saida,"----------------------------------\n");
             }
             if (comando == 'R')
@@ -159,8 +160,8 @@ int main(int argc, char *argv[])
                 fprintf(Saida,"Nodos: %d\n",conta_nodos(avltree));
                 fprintf(Saida,"Altura: %d\n",AlturaNodo(avltree));
                 fprintf(Saida,"Fator: %d\n",FatorArvore(avltree));
-                fprintf(Saida,"Comparações: %.0lf\n",comparacoes);
-                fprintf(Saida,"Rotações: %.0lf\n",rotacoes);
+                fprintf(Saida,"Comparações: %.0ld\n",comparacoes);
+                fprintf(Saida,"Rotações: %d\n",rotacoes);
                 fprintf(Saida,"----------------------------------\n");
             }
 
@@ -177,8 +178,7 @@ int main(int argc, char *argv[])
                 while(!feof(Removendo))                 // Enquanto não acabar vai inserir na árvore e atualizar seus valores
                 {
                     fscanf(Removendo, "%i",&valor_lido);    // Le os valores desse outro arquivo
-                    avltree=exclui(avltree,valor_lido,&comparacoes,&rotacoes);
-                    avltree=verifica_avl(avltree,&comparacoes,&rotacoes);
+                    avltree=deletion(avltree,valor_lido,&comparacoes,&rotacoes);
                 }
                 end = clock();                                 // Termina o tempo e grava no arquivo de saída as informações
                 time = 1000 * (end - start) / CLOCKS_PER_SEC;

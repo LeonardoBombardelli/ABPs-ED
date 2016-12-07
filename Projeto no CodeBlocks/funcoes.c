@@ -30,7 +30,7 @@ AVL* InicializaAvl()
 
 //---------------------------------------------------------------------------------//
 
-ABP* InsereArvore(ABP *Raiz, int num, double *comparacoes)
+ABP* InsereArvore(ABP *Raiz, int num, long int *comparacoes)
 {
     if (Raiz == NULL)
     {
@@ -53,7 +53,7 @@ ABP* InsereArvore(ABP *Raiz, int num, double *comparacoes)
     return Raiz;
 }
 
-AVL* InsereAVL(AVL *a, int x, int *ok, double *comparacoes, int *rotacoes)
+AVL* InsereAVL(AVL *a, int x, int *ok, long int *comparacoes, int *rotacoes)
 {
     /* Insere nodo em uma árvore AVL, onde A representa a raiz da árvore,
     x, a chave a ser inserida e h a altura da árvore */
@@ -111,7 +111,28 @@ AVL* InsereAVL(AVL *a, int x, int *ok, double *comparacoes, int *rotacoes)
             }
         }
     }
+    a->altura=AlturaNodoAVL(a);
     return a;
+}
+int AlturaNodoAVL(AVL *T)
+{
+    int lh,rh;
+    if(T==NULL)
+        return(0);
+
+    if(T->esq==NULL)
+        lh=0;
+    else
+        lh=1+T->esq->altura;
+
+    if(T->dir==NULL)
+        rh=0;
+    else
+        rh=1+T->dir->altura;
+
+    if(lh>rh)
+        return(lh);
+    return(rh);
 }
 AVL* Caso1 (AVL *a, int *ok, int *rotacoes)
 {
@@ -150,44 +171,7 @@ AVL* Caso2 (AVL *a, int *ok, int *rotacoes)
     *ok = 0;
     return a;
 }
-
-AVL* exclui(AVL *no, int x, double *comparacoes,int *rotacoes)
-{
-    AVL *aux;
-    if (no == NULL)
-        return no;
-    *comparacoes+=2;
-    if (no->info==x)  //encontrou
-    {
-        aux=no;
-        // se não tiver filho na esquerda
-        *comparacoes+=1;
-        if (no->esq==NULL)
-            no=no->dir; //então o filho da direita substitui
-        else
-            // se não tem filho a
-            *comparacoes+=1;
-            if (no->dir==NULL)
-                no=no->esq; // então o filho da esquerda substitui
-            else  // senão possui dois filhos
-            {
-                aux=retorna_maior(&(no->esq),comparacoes); // busca o substituto
-                no->info=aux->info;
-            }
-        free (aux); // ou é folha
-        return no;
-    }
-    else
-    {
-        *comparacoes+=1;
-        if (x<no->info)
-            return (exclui(no->esq,x,comparacoes,rotacoes));
-        else
-            return (exclui(no->dir,x,comparacoes,rotacoes));
-    }
-}
-
-AVL* retorna_maior(AVL **no, double *comparacoes)
+AVL* retorna_maior(AVL **no, long int *comparacoes)
 {
     AVL *aux;
     aux = *no;
@@ -201,7 +185,7 @@ AVL* retorna_maior(AVL **no, double *comparacoes)
         return retorna_maior(&(*no)->dir,comparacoes);
 }
 
-AVL* verifica_avl(AVL *no,double *comparacoes,int *rotacoes)
+AVL* verifica_avl(AVL *no,long int *comparacoes,int *rotacoes)
 {
     if (no!=NULL)
     {
@@ -242,6 +226,164 @@ AVL* verifica_avl(AVL *no,double *comparacoes,int *rotacoes)
             no->dir=verifica_avl(no->dir,comparacoes,rotacoes);
     }
     return no;
+}
+AVL* inorder_succ_right_tree(AVL* root,long int *comparacoes, long int *rotacoes)
+{
+    AVL* temp = root->dir;
+    while(temp->esq)
+    {
+        *comparacoes+=1;
+        temp = temp->esq;
+    }
+    *comparacoes+=1;
+    return temp;
+}
+AVL* deletion(AVL* root, int val,long int *comparacoes, long int *rotacoes)
+{
+    //normal deletion
+    AVL* temp;
+    *comparacoes+=1;
+    if(!root)
+        return NULL;
+    *comparacoes+=1;
+    if(root->info > val)
+    {
+        root->esq = deletion(root->esq, val,comparacoes,rotacoes);
+    }
+    else if(root->info < val)
+    {
+        *comparacoes+=1;
+        root->dir = deletion(root->dir, val,comparacoes,rotacoes);
+    }
+    else
+    {
+        *comparacoes+=1;
+        *comparacoes+=1;
+        if(root->esq == NULL || root->dir == NULL)
+        {
+            *comparacoes+=1;
+            if(root->esq)
+                temp = root->esq;
+            else if(root->dir)
+            {
+                *comparacoes+=1;
+                temp = root->dir;
+            }
+            else
+            {
+                *comparacoes+=1;
+                *comparacoes+=1;
+                temp = NULL;
+            }
+            root = NULL;
+            free(root);
+            return temp;
+        }
+        else
+        {
+            temp = inorder_succ_right_tree(root,comparacoes,rotacoes);
+            root->info = temp->info;
+            root->dir = deletion(root->dir,temp->info,comparacoes,rotacoes);
+        }
+    }
+    *comparacoes+=1;
+    if(root)
+    {
+        //update height
+        root->altura = max(get_height(root->esq,comparacoes,rotacoes), get_height(root->dir,comparacoes,rotacoes)) + 1;
+        int balance = get_balance(root,comparacoes,rotacoes);
+        *comparacoes+=1;
+        if(balance > 1 || balance < -1)
+            root = balance_tree(root,comparacoes,rotacoes);
+    }
+    return root;
+}
+int get_balance(AVL* root,long int *comparacoes, long int *rotacoes)
+{
+    *comparacoes+=1;
+    if(!root)
+        return 0;
+    return (get_height(root->esq,comparacoes,rotacoes) - get_height(root->dir,comparacoes,rotacoes));
+}
+int get_height(AVL* root,long int *comparacoes, long int *rotacoes)
+{
+    *comparacoes+=1;
+    if(!root)
+        return 0;
+    else
+        return root->altura;
+}
+AVL* balance_tree(AVL* root,long int *comparacoes, long int *rotacoes)
+{
+    AVL* x, *y;
+    int lheight,rheight;
+    lheight = get_height(root->esq,comparacoes,rotacoes);
+    rheight = get_height(root->dir,comparacoes,rotacoes);
+    *comparacoes+=1;
+    if(lheight >= rheight)
+        x = root->esq;
+    else
+        x = root->dir;
+    lheight = get_height(x->esq,comparacoes,rotacoes);
+    rheight = get_height(x->dir,comparacoes,rotacoes);
+    *comparacoes+=1;
+    if(x == root->esq)
+    {
+        *comparacoes+=1;
+        if(lheight >= rheight)
+        {
+            y = x->esq;
+        }
+        else
+            y = x->dir;
+    }
+    *comparacoes+=1;
+    if(x == root->dir)
+    {
+        *comparacoes+=1;
+        if(lheight > rheight)
+        {
+            y = x->esq;
+        }
+        else
+            y = x->dir;
+    }
+    //left-left case
+    *comparacoes+=1;
+    if(root->esq == x && x->esq == y)
+    {
+        *rotacoes+=1;
+        root = rotacao_direita(root);
+    }
+    //right-right case
+    else if(x == root->dir && x->dir == y)
+    {
+        *comparacoes+=1;
+        *rotacoes+=1;
+        root = rotacao_esquerda(root);
+    }
+    //left-right case
+    else if(x == root->esq && y == x->dir)
+    {
+        *comparacoes+=1;
+        *comparacoes+=1;
+        *rotacoes+=1;
+        *rotacoes+=1;
+        root->esq = rotacao_esquerda(root->esq);
+        root = rotacao_direita(root);
+    }
+    //right-left case
+    else if(x == root->dir && y == x->esq)
+    {
+        *comparacoes+=1;
+        *comparacoes+=1;
+        *comparacoes+=1;
+        *rotacoes+=1;
+        *rotacoes+=1;
+        root->dir = rotacao_direita(root->dir);
+        root = rotacao_esquerda(root);
+    }
+    return root;
 }
 //---------------------------------------------------------------------------------//
 
@@ -322,7 +464,7 @@ int conta_nodos(ABP *Raiz)
 
 //------------------------------------------------------------------------------//
 
-int AchaNodo(ABP *Nodo, int info, double *comparacoes)
+int AchaNodo(ABP *Nodo, int info, long int *comparacoes)
 {
     while(Nodo != NULL)
     {
@@ -365,7 +507,7 @@ void Mostra_Infos (AVL *Raiz)
 
 //---------------------------------------------------------------------------------//
 
-AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes)
+AVL* Rotacao (AVL *Nodo,int *rotacoes,long int *comparacoes)
 {
     if (Nodo)
     {
@@ -404,7 +546,7 @@ AVL* Rotacao (AVL *Nodo,double *rotacoes,double *comparacoes)
 
 //---------------------------------------------------------------------------------//
 
-ABP* RemoveNodo(ABP *raiz, int nodo, double *comparacoes)
+ABP* RemoveNodo(ABP *raiz, int nodo, long int *comparacoes)
 {
     ABP *aux;
     ABP *anterior;
@@ -507,7 +649,7 @@ ABP* RemoveNodo(ABP *raiz, int nodo, double *comparacoes)
     return raiz;
 }
 
-int the_maior(ABP *nodo, double *comparacoes)
+int the_maior(ABP *nodo, long int *comparacoes)
 {
     int max;
 

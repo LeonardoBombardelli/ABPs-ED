@@ -1,0 +1,6 @@
+I n10000.txt
+E
+C n10000.txt
+E
+R n10000.txt
+E
