@@ -1,0 +1,6 @@
+I n10000sorted.txt
+E
+C n1000sorted.txt
+E
+R n100sorted.txt
+E

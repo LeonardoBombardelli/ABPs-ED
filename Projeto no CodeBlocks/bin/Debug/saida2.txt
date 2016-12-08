@@ -1,0 +1,60 @@
+*********VERSÃO COM ABP***********
+Inserindo dados do arquivo n10000rand.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 6 ms
+Nodos: 10000
+Altura: 33
+Fator: 19
+Comparações: 159914
+Rotações: 0
+----------------------------------
+*********VERSÃO COM ABP***********
+Consultando dados do arquivo n1000rand.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 0 ms
+Nodos: 10000
+Altura: 33
+Fator: 19
+Comparações: 48356
+Rotações: 0
+----------------------------------
+*********VERSÃO COM ABP***********
+Removendo dados do arquivo n100rand.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 0 ms
+Nodos: 9900
+Altura: 33
+Fator: 19
+Comparações: 5306
+Rotações: 0
+----------------------------------
+*********VERSÃO COM AVL***********
+Inserindo dados do arquivo n10000rand.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 8 ms
+Nodos: 10000
+Altura: 16
+Fator: 1
+Comparações: 195319
+Rotações: 6963
+----------------------------------
+*********VERSÃO COM AVL***********
+Consultando dados do arquivo n1000rand.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 1 ms
+Nodos: 10000
+Altura: 16
+Fator: 1
+Comparações: 36401
+Rotações: 0
+----------------------------------
+*********VERSÃO COM AVL***********
+Removendo dados do arquivo n100rand.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 0 ms
+Nodos: 9900
+Altura: 17
+Fator: 1
+Comparações: 17896
+Rotações: 482
+----------------------------------

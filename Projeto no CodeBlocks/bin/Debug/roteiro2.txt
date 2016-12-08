@@ -1,6 +1,6 @@
-I n10000.txt
+I n10000rand.txt
 E
-C n100.txt
+C n1000rand.txt
 E
-R n1000.txt
+R n100rand.txt
 E

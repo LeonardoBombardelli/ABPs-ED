@@ -1,0 +1,6 @@
+I n100000rand.txt
+E
+C n10000rand.txt
+E
+R n1000rand.txt
+E

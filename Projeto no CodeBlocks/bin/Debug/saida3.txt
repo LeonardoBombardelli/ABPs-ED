@@ -1,0 +1,60 @@
+*********VERSÃO COM ABP***********
+Inserindo dados do arquivo n10000sorted.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 728 ms
+Nodos: 10000
+Altura: 10000
+Fator: 9999
+Comparações: 49995000
+Rotações: 0
+----------------------------------
+*********VERSÃO COM ABP***********
+Consultando dados do arquivo n1000sorted.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 3 ms
+Nodos: 10000
+Altura: 10000
+Fator: 9999
+Comparações: 1500500
+Rotações: 0
+----------------------------------
+*********VERSÃO COM ABP***********
+Removendo dados do arquivo n100sorted.txt
+********ESTATÍSTICAS ABP***********
+Tempo: 0 ms
+Nodos: 9900
+Altura: 9900
+Fator: 9899
+Comparações: 1000
+Rotações: 0
+----------------------------------
+*********VERSÃO COM AVL***********
+Inserindo dados do arquivo n10000sorted.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 7 ms
+Nodos: 10000
+Altura: 14
+Fator: 1
+Comparações: 153589
+Rotações: 9986
+----------------------------------
+*********VERSÃO COM AVL***********
+Consultando dados do arquivo n1000sorted.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 0 ms
+Nodos: 10000
+Altura: 14
+Fator: 1
+Comparações: 35018
+Rotações: 0
+----------------------------------
+*********VERSÃO COM AVL***********
+Removendo dados do arquivo n100sorted.txt
+********ESTATÍSTICAS AVL***********
+Tempo: 0 ms
+Nodos: 9900
+Altura: 20
+Fator: 1
+Comparações: 19920
+Rotações: 57
+----------------------------------
